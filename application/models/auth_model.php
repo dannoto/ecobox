@@ -11,6 +11,7 @@ class Auth_model extends CI_Model {
         return $this->db->get('usuarios')->row_array();
     }
 
+  
    
 
 
