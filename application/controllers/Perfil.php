@@ -128,5 +128,21 @@ class Perfil extends CI_Controller {
 		$this->load->view('user/perfil/cupons', $data);
 	}
 
+    public function ajuda()
+	{
+
+        $usr = $this->session->userdata('session_user');
+
+		
+        $data = array(
+            'usr' => $this->perfil_model->getPerfil($usr['id']),
+            'pedidos' => $this->pedido_model->getPedidosByUser($usr['id']),
+        );
+      
+
+		$this->load->view('user/perfil/ajuda', $data);
+	}
+
+
 
 }
