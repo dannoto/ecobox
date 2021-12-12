@@ -23,7 +23,7 @@ class Login extends CI_Controller {
 
 			if ($auth) {
 				$this->session->set_userdata('session_user', $auth);
-				redirect(base_url('login'));
+				redirect(base_url());
 			} else {
 				$this->session->set_flashdata('login','Suas credenciais estão incorretas.');
 			}

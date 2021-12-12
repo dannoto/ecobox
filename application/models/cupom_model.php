@@ -24,6 +24,11 @@ class Cupom_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->get('cupons')->row_array();
     }
+    public function getCuponsByUser($id) {
+
+        $this->db->where('cupom_user', $id);
+        return $this->db->get('cupons')->result();
+    }
 
     public function getCuponsByCidade($cupom_cidade) {
 

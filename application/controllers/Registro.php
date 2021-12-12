@@ -43,7 +43,7 @@ class Registro extends CI_Controller {
 			$imagem = $imagem;
 
 			if ($this->cadastro_model->Registrar($nome, $sobrenome, $email, $telefone, $password, $token, $registro, $identidade, $nascimento, $sexo, $imagem)) {
-				$this->session->set_flashdata('registrar', 'Registrado com sucesso.');
+				redirect(base_url());
 			} else {
 				$this->session->set_flashdata('registrar', 'Ocorreu um erro ao registrar.');
 			}
