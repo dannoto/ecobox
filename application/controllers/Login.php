@@ -16,10 +16,10 @@ class Login extends CI_Controller {
 
 		if ($this->input->post()) {
 
-			$email = htmlspecialchars($this->input->post('email'));
-			$password = htmlspecialchars($this->input->post('password'));
+			$user_email = htmlspecialchars($this->input->post('user_email'));
+			$user_password = htmlspecialchars($this->input->post('user_password'));
 
-			$auth = $this->auth_model->Login($email, $password); 
+			$auth = $this->auth_model->Login($user_email, $user_password); 
 
 			if ($auth) {
 				$this->session->set_userdata('session_user', $auth);

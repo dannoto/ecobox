@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8.767" height="15" viewBox="0 0 8.767 15">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #707070;
+      }
+    </style>
+  </defs>
+  <path id="Icon_awesome-chevron-left" data-name="Icon awesome-chevron-left" class="cls-1" d="M2.166,9.565,8.6,2.89a.774.774,0,0,1,1.123,0l.75.779a.847.847,0,0,1,0,1.164l-5.1,5.315,5.1,5.316a.847.847,0,0,1,0,1.164l-.75.779a.774.774,0,0,1-1.123,0L2.166,10.731A.847.847,0,0,1,2.166,9.565Z" transform="translate(-1.933 -2.648)"/>
+</svg>

@@ -6,7 +6,7 @@ class Cadastro_model extends CI_Model {
 
     public function Registrar($nome, $sobrenome, $email, $telefone, $password, $token, $registro, $identidade, $nascimento, $sexo, $imagem) {
 
-
+ 
 
         $data = array(
             'user_nome' => $nome,

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_ionic-md-search" data-name="Icon ionic-md-search" class="cls-1" d="M25.868,23.357H24.5l-.513-.429a11.347,11.347,0,0,0,2.65-7.286A11.069,11.069,0,1,0,15.611,26.786a11.455,11.455,0,0,0,7.265-2.657l.513.429v1.371L31.936,34.5,34.5,31.929Zm-10.257,0A7.714,7.714,0,1,1,23.3,15.643,7.671,7.671,0,0,1,15.611,23.357Z" transform="translate(-4.5 -4.5)"/>
+</svg>

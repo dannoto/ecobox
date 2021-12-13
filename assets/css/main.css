@@ -6,9 +6,10 @@
     color: #6A9F46;
 }
 
-.text-grey {
-    color: #707070;
+.text-green :hover {
+    color: #6A9F46;
 }
+
 .border-green {
     border-color: #6A9F46;
 }
