@@ -5,6 +5,10 @@
 .text-green {
     color: #6A9F46;
 }
+.bg-green-80 {
+    background-color: #6A9F46;
+    opacity: 0.5;
+}
 
 .text-green :hover {
     color: #6A9F46;
