@@ -39,7 +39,7 @@
                 <!-- Início Formulário Cadastro -->
                 <div class="col-span-1 md:col-span-3 xl:col-span-1 grid justify-items-center">
                     <!-- Início Título -->
-                    <p class="font-semibold text-gray-700 text-2xl md:text-3xl text-center md:pb-5 pt-12">Crie uma Conta</p>
+                    <p class="font-semibold text-gray-700 text-2xl md:text-3xl text-center md:pb-5 pt-12">Crie uma Conta AAA</p>
                     <!-- Fim Título -->
 
                     <div>
