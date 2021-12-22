@@ -29,10 +29,12 @@
 <body>
     <section>
         <!-- Início Header -->
+        <header class="w-full fixed z-50">
             <?php $this->load->view('comp/off/header_simples')?>
+        </header>
         <!-- Fim Header -->
 
-        <main>
+        <main class="pt-16">
             <div class="grid grid-cols-1 md:grid-cols-5 xl:grid-cols-3 px-5 md:px-0">
                 <div class="col-span-1"></div>
 

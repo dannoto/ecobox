@@ -29,17 +29,19 @@
 <body>
     <section>
         <!-- Início Header -->
-        <?php $this->load->view('comp/off/header_simples')?>
+        <header class="w-full fixed z-50">
+            <?php $this->load->view('comp/off/header_simples')?>
+        </header>
         <!-- Fim Header -->
 
-        <main>
+        <main class="pt-16">
             <div class="grid grid-cols-1 md:grid-cols-5 xl:grid-cols-3 px-5 md:px-0">
                 <div class="col-span-1"></div>
 
                 <!-- Início Formulário Cadastro -->
                 <div class="col-span-1 md:col-span-3 xl:col-span-1 grid justify-items-center">
                     <!-- Início Título -->
-                    <p class="font-semibold text-gray-700 text-2xl md:text-3xl text-center md:pb-5 pt-12">Crie uma Conta AAA</p>
+                    <p class="font-semibold text-gray-700 text-2xl md:text-3xl text-center md:pb-5 pt-12">Crie uma Conta</p>
                     <!-- Fim Título -->
 
                     <div>
@@ -65,7 +67,7 @@
                         <label for="email" class="font-semibold text-gray-700">E-mail</label>
                         <input type="email" name="email" id="email" autocomplete="off" required maxlength="200" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
                         
-                        <label for="telefone" class="font-semibold text-gray-700">Telefone</label>
+                        <label for="telefone" class="font-semibold text-gray-700">Celular</label>
                         <input type="tel" name="telefone" required id="telefone" onkeypress="mascaraTel(this)" inputmode="number" minlength="11" maxlength="15" autocomplete="off" required class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
                         
                         <label for="password" class="font-semibold text-gray-700">Senha</label>
@@ -93,23 +95,11 @@
             </div>
         </main>
     </section>
+
+<script type="text/javascript" src="<?=base_url()?>/assets/js/mascaraCelular.js"></script>
 </body>
 
 </html>
-
-<!-- Máscara Input Celular -->
-<script type="text/javascript">
-    function mascaraTel(telefone){ 
-        if(telefone.value.length == 0)
-        telefone.value = '(' + telefone.value; 
-
-        if(telefone.value.length == 3)
-        telefone.value = telefone.value + ') '; 
-
-        if(telefone.value.length == 10)
-        telefone.value = telefone.value + '-';
-    }
-</script>
 
 <!-- Hover Voltar -->
 <script>

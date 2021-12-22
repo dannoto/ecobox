@@ -69,7 +69,6 @@
                                 <p class="font-semibold text-white text-xl">Entrar</p>
                             </button>
 
-
                             <p class="text-gray-700">Não tem uma conta? <a href="<?=base_url()?>cadastro" class="text-green font-semibold">Cadastre-se</a></p>
                         </form>
                         <!-- Fim Formulário -->

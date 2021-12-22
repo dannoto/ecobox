@@ -15,11 +15,7 @@ class Restaurante extends CI_Controller {
 			$this->load->view('user/restaurante');
         } else {
 			$this->load->view('restaurante/home');
-		}
-
-
-
-		
+		}	
 	}
 
 
@@ -30,6 +26,4 @@ class Restaurante extends CI_Controller {
 	public function login () {
 		$this->load->view('restaurante/login');
 	}
-
-	
 }
