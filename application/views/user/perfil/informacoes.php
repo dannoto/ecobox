@@ -65,14 +65,14 @@
         <main class="pt-16">
             <div class="grid grid-cols-1 py-5 md:py-14 px-5 md:px-14 lg:px-24 xl:px-32"> 
                 <div class="col-span-1 bg-white px-5 py-5 md:px-8 lg:px-14 md:py-8 lg:py-10 h-auto">
-                    <h1 class="font-semibold text-xl md:text-2xl text-gray-700 pb-10">Informações da Conta</h1>
+                    <h1 class="font-semibold text-xl md:text-2xl text-center md:text-left text-gray-700 pb-10">Dados da Conta</h1>
 
                     <div class="flex justify-center">
                         <img class="h-52 mb-8 rounded-full border-solid border-4 border-green" src="<?=base_url()?>assets/images/perfil.png" alt=""/>
                     </div>
 
                     <form action="">
-                        <div class="grid grid-cols-2 pb-10">
+                        <div class="grid grid-cols-2 pb-5 md:pb-10">
                             <div class="col-span-2">
                                 <label for="file" class="font-semibold text-gray-700">Foto de Perfil</label><br>
                                 <input class="pt-2 w-full" type="file" name="file" accept="image/*"/>
@@ -103,7 +103,7 @@
                             
                             <div class="col-span-2 lg:col-span-1 md:pl-0 lg:pl-5">
                                 <label for="telefone" class="font-semibold text-gray-700">Celular</label>
-                                <input type="tel" name="telefone" required id="telefone" onkeypress="mascaraTel(this)" inputmode="number" minlength="11" maxlength="15" autocomplete="off" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                                <input type="tel" name="telefone" id="telefone" onkeypress="mascaraTel(this)" inputmode="number" minlength="11" maxlength="15" autocomplete="off" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
                             </div>
                         </div>
 
@@ -124,7 +124,7 @@
                                 <h1 class="font-semibold text-gray-700">Gênero</h1>
 
                                 <div class="block md:flex md:space-x-5 pt-3">
-                                    <div class="flex items-center">
+                                    <div class="flex items-center pb-1 md:pb-0">
                                         <input type="radio" id="generoMasculino" name="genero">
                                         <label for="generoMasculino" class="text-base text-gray-700 px-2">Masculino</label>
                                     </div>

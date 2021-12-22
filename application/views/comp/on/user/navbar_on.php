@@ -17,7 +17,7 @@
     <!-- Fim Btn Menu -->
 
     <!-- Início Logo -->
-    <div class="col-span-6 md:col-span-4 flex items-center">
+    <div class="col-span-8 md:col-span-5 flex justify-center md:justify-start items-center">
         <a href="<?=base_url()?>">
             <img class="h-14 py-1" src="<?=base_url()?>assets/images/logo.png" alt="">
         </a>
@@ -25,8 +25,8 @@
     <!-- Fim Logo -->
 
     <!-- Início Barra Pesquisa Navbar -->
-    <div class="md:col-span-5 hidden md:flex justify-center items-center">
-        <input class="w-9/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou loja">
+    <div class="md:col-span-4 hidden md:flex justify-center items-center">
+        <input class="w-11/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou loja">
         <button class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
             <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
         </button>
@@ -34,11 +34,8 @@
     <!-- Fim Barra Pesquisa Navbar -->
 
     <!-- Início Btn Login e Carrinho -->
-    <div class="col-span-4 md:col-span-2 flex justify-end space-x-4 md:space-x-8 items-center pr-2 md:pr-6">
-        <a href="<?=base_url()?>all/login">
-            <img class="h-6" src="<?=base_url()?>assets/images/login.svg" alt="">
-        </a>
-        <a class="flex" href="<?=base_url()?>user/perfil/carrinho">
+    <div class="col-span-2 md:col-span-2 flex justify-end space-x-4 md:space-x-8 items-center pr-4 md:pr-6">
+        <a class="flex" href="<?=base_url()?>carrinho">
             <img class="h-6" src="<?=base_url()?>assets/images/carrinho.svg" alt="">
             <div style="background-color: #dbab4f" class="rounded-full w-4 h-4 flex justify-center items-center -mt-2 -ml-2">
                 <p style="font-size: 9px" class="font-semibold text-white">1</p>
@@ -52,6 +49,15 @@
 <!-- Início Menu -->
 <div id="overlay" class="fixed hidden justify-center items-center inset-t-16 z-50 left-0 w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12">
     <div class="bg-white h-screen shadow-xl">
+        <!-- Início Barra Pesquisa Navbar -->
+        <div class="flex justify-center items-center pt-5 md:hidden">
+            <input class="w-9/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou loja">
+            <button class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
+                <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
+            </button>
+        </div>
+        <!-- Fim Barra Pesquisa Navbar -->
+
         <div class="flex space-x-3 items-center px-5 py-5">
             <img class="w-16 h-16 rounded-full border-solid border-2 border-green" src="<?=base_url()?>assets/images/perfil.png" alt="">
             <h1 class="font-semibold text-gray-700 text-lg">Ana Martins</h1>
@@ -59,11 +65,12 @@
 
         <div class="menu px-5">
             <ul>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>user/perfil/informacoes">Editar Dados</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>ser/perfil/pedidos">Meus Pedidos</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>ser/perfil/cupons">Meus Cupons</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>ser/perfil/seguranca">Segurança</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>ser/perfil/ajuda">Precisa de Ajuda?</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>informacoes">Editar Dados</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>pedidos">Meus Pedidos</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>cupons">Meus Cupons</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>seguranca">Segurança</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>ajuda">Precisa de Ajuda?</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base">Sair</a></li>
             </ul>
         </div>
         
@@ -72,8 +79,8 @@
         <div class="menu px-5 pt-2">
             <ul>
                 <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>restaurante/inscricao/cadastro">Cadastrar meu Restaurante</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>all/termos">Termos</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>all/privacidade">Privacidade</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>termos">Termos</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>privacidade">Privacidade</a></li>
             </ul>
         </div>
     </div>
