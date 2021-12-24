@@ -1,0 +1,15 @@
+<svg id="Componente_1_1" data-name="Componente 1 – 1" xmlns="http://www.w3.org/2000/svg" width="54" height="53" viewBox="0 0 54 53">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #6a9f46;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <ellipse id="Elipse_18" data-name="Elipse 18" class="cls-1" cx="27" cy="26.5" rx="27" ry="26.5"/>
+  <path id="Icon_open-plus" data-name="Icon open-plus" class="cls-2" d="M8.992,0V9.7H0v6.469H8.992v9.7h5.994v-9.7h8.992V9.7H14.986V0Z" transform="translate(15.012 13.062)"/>
+</svg>
