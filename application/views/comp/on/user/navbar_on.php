@@ -79,6 +79,7 @@
         <div class="menu px-5 pt-2">
             <ul>
                 <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>restaurante/inscricao/cadastro">Cadastrar meu Restaurante</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>faq">Faq</a></li>
                 <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>termos">Termos</a></li>
                 <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>privacidade">Privacidade</a></li>
             </ul>

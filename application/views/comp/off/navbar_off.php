@@ -65,7 +65,7 @@
             <ul>
                 <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>login">Login</a></li>
                 <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>cadastro">Cadastrar</a></li>
-                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>ajuda">Precisa de Ajuda?</a></li>
+                <li class="pb-1"><a class="menuItens text-gray-700 text-base" href="<?=base_url()?>faq">Precisa de Ajuda?</a></li>
             </ul>
         </div>
         

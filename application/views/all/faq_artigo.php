@@ -38,7 +38,7 @@
                 <div class="md:col-span-1 lg:col-span-2"></div>
 
                 <div class="md:col-span-10 lg:col-span-8 xl:col-span-6 w-full grid justify-items-center">
-                    <h1 class="font-semibold text-white text-xl md:text-2xl text-center">PRIVACIDADE</h1>
+                    <h1 class="font-semibold text-white text-xl md:text-2xl text-center">Lorem Ipsum is simply dummy text of the printing</h1>
                 </div>
 
                 <div class="md:col-span-1 lg:col-span-2"></div>
