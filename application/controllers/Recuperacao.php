@@ -16,21 +16,24 @@ class Recuperacao extends CI_Controller {
 	public function index()
 	{
 
-		$usr = $this->session->userdata('session_start');
+		// $usr = $this->session->userdata('session_start');
 
 		if ($this->input->post()) {
 
 			// print_r($this->input->post());
 	
-			$user_email = htmlspecialchars($this->input->post('user_email'));
-			$user_token = $this->recuperacao_model->getToken($usr['id']);
+			
 
 			// echo $this->input->post('email');
+			$user_email = htmlspecialchars($this->input->post('user_email'));
 
 			if ($this->cadastro_model->checkEmail($user_email)) {
 			
 				$this->session->set_flashdata('recuperacao', 'Não existe conta com este e-mail.');
 			} else {
+
+				
+				$user_token = $this->recuperacao_model->getToken($user_email);
 				
 				if ($this->email_model->EmailRecuperacao($user_email, $user_token)) {
 				

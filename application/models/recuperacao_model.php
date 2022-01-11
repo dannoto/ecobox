@@ -25,8 +25,8 @@ class Recuperacao_model extends CI_Model {
         
     }
     
-    public function getToken($id) {
-        $this->db->where('id', $id);
+    public function getToken($email) {
+        $this->db->where('user_email', $email);
         return $this->db->get('usuarios')->row_array()['user_token'];
 
     }

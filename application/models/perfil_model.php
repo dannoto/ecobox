@@ -9,7 +9,7 @@ class Perfil_model extends CI_Model {
         return $this->db->get('usuarios')->row_array();
     }
 
-  
+    
     public function getPedidos($pedido_user) {
 
         $this->db->where('pedido_user', $pedido_user);
@@ -22,20 +22,37 @@ class Perfil_model extends CI_Model {
         return $this->db->get('cupons')->result();
     }
 
-    public function updateInformacoes($id, $user_nome, $user_sobrenome, $user_email, $user_telefone, $user_identidade, $user_nascimento, $user_genero ) {
+    public function updateInformacoes($id, $user_nome, $user_sobrenome,  $user_telefone, $user_identidade, $user_nascimento, $user_sexo, $user_imagem ) {
 
         $this->db->where('id', $id);
 
-        $data = array (
 
-            'user_nome' => $user_nome,
-            'user_sobrenome' => $user_sobrenome,
-            'user_email' => $user_email,
-            'user_telefone' => $user_telefone,
-            'user_identidade' => $user_identidade,
-            'user_nascimento' => $user_nascimento,
-            'user_genero' => $user_genero,
-        );
+        if (strlen($user_imagem) == 0 ) {
+
+            $data = array (
+
+                'user_nome' => $user_nome,
+                'user_sobrenome' => $user_sobrenome,
+                'user_telefone' => $user_telefone,
+                'user_identidade' => $user_identidade,
+                'user_nascimento' => $user_nascimento,
+                'user_sexo' => $user_sexo,
+            );
+
+        } else {
+
+            $data = array (
+
+                'user_nome' => $user_nome,
+                'user_sobrenome' => $user_sobrenome,
+                'user_telefone' => $user_telefone,
+                'user_identidade' => $user_identidade,
+                'user_nascimento' => $user_nascimento,
+                'user_sexo' => $user_sexo,
+                'user_imagem' => $user_imagem,
+            );
+        }
+       
 
         return $this->db->update('usuarios', $data);
     }
