@@ -65,14 +65,42 @@
         <main class="pt-16">
             <div class="grid grid-cols-1 py-5 md:py-14 px-5 md:px-14 lg:px-24 xl:px-32"> 
                 <div class="col-span-1 bg-white px-5 py-5 md:px-8 lg:px-14 md:py-8 lg:py-10 h-auto">
-                    <!-- <h1 class="font-semibold text-xl md:text-2xl text-center md:text-left text-gray-700 ">Crie seu Restaurante</h1> -->
+                    <h1 class="font-semibold text-xl md:text-2xl text-center md:text-left text-gray-700 ">Documentos Obrigatórios</h1>
 
-                    <div class="flex justify-center mb-5">
-                        <img width="150" height="150" src="<?=base_url()?>assets/images/pendente.png" alt="">
+                    <form action=""  method="post" enctype="multipart/form-data">
+
+                        <div class="pt-8 cursor-pointer">
+                            <label for="" class="font-semibold text-lg mb-3">Contrato Social</label>
+                            <div  class="mt-3">
+                            <input  accept="application/pdf" name="restaurante_contrato_social" required  type="file">
+                            </div>
+                          
+                        </div>
+
+                        <div class="pt-8 cursor-pointer">
+                            <label for="" class="font-semibold text-lg mb-3">Alvará dos Bombeiros</label>
+                            <div  class="mt-3">
+                                <input  accept="application/pdf" name="restaurante_alvara_bombeiros" required  type="file">
+                            </div>
+                        </div>
+
+                        <div class="pt-8 cursor-pointer">
+                            <label for="" class="font-semibold text-lg mb-3">Alvará da Vigilância Sanitária</label>
+                           <div class="mt-3">
+                                <input  accept="application/pdf" name="restaurante_alvara_sanitaria" required  type="file">
+                           </div>
+                        </div>
+
+
+                        <div class="grid justify-center md:justify-center">
+                        <button type="submit" class="w-auto h-12 px-20 mb-5 mt-14 xl:mt-10 rounded-md bg-green" >
+                            <p class="font-semibold text-white text-xl">CONTINUAR</p>
+                        </button>
                     </div>
-                    <h1 class="text-center text-xl font-semibold">Muito Obrigado!</h1>
-                    <p class="text-center">Seu cadastro será avaliado e retornaremos em breve com um e-mail.</p>
-                    <p class="text-center">Falta muito pouco para você começar a vender com a ECOBOX.</p>
+
+
+
+                    </form>
 
 
 
@@ -84,25 +112,7 @@
     </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="<?=base_url()?>/assets/js/mascaraCelular.js"></script>
-<script type="text/javascript" src="<?=base_url()?>/assets/js/mascaraData.js"></script>
-<script>
-                        $("input:checkbox").on('click', function() {
-                        // in the handler, 'this' refers to the box clicked on
-                      
-                        var $box = $(this);
-                        if ($box.is(":checked")) {
-                            // the name of the box is retrieved using the .attr() method
-                            // as it is assumed and expected to be immutable
-                            var group = "input:checkbox";
-                            // the checked state of the group/box on the other hand will change
-                            // and the current value is retrieved using .prop() method
-                            $(group).prop("checked", false);
-                            $box.prop("checked", true);
-                        } else {
-                            $box.prop("checked", false);
-                        }
-                        });
-</script>
+
+
 </body>
 </html>

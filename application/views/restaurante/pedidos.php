@@ -78,23 +78,17 @@
                     </div>   
                     
                     
-                    <div class="grid xl:grid-cols-3 grid-cols-1 mb-5">
-                        <div class="xl:grid-cols-1 grid-cols-1 mb-3">
-                            <label for="" class="mt">Mes</label><br>
-                     
-                           <select name="" class="border-gray-400 border p-2 w-2/3 h-12 " >
-                               <option value="">Janeiro</option>
-                           </select>
+                    <div class="grid xl:grid-cols-2 grid-cols-1 mb-5">
+                        <div class="xl:grid-cols-1 grid-cols-1">
+                            <label for="">Busca</label><br>
+                            <input class="border-gray-400 border p-2 w-2/3 h-12" placeholder="Buscar pedidos pelo código" type="text">
+                            <button class="h-12 px-4 text-white h-12 bg-green">Buscar</button>
                         </div>
-                        <div class="xl:grid-cols-1 grid-cols-1 mb-3 ">
-                            <label for="" class="mt-2" >Ano</label><br>
-                     
-                            <select name="" class="border-gray-400 border p-2 w-2/3 h-12 " >
-                                <option value="">Janeiro</option>
+                        <div class="xl:grid-cols-1 grid-cols-1 ">
+                            <label for="filtro" class="">Filtro</label><br>
+                            <select name="filtro" class="h-12 p-2 w-full" id="filtro">
+                                <option  value="">Todos</option>
                             </select>
-                        </div>
-                        <div class="xl:grid-cols-1 grid-cols-1 pt-5">
-                        <button class="h-12 px-4 text-white h-12 bg-green">Buscar</button>
                         </div>
                     </div>
 
@@ -102,35 +96,38 @@
 
                     <div class="border-gray-400 border mt-2  ">
                         <div class="grid xl:grid-cols-4" >
-                            <!-- <div class="p-5">
-                                <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
-                           
-                            </div> -->
-                            <div class="p-5">
-                                <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
-                                
-                          
-                                
+                            <div class=" ">
+                                <img class="w-32 h-32 mt-2 m-auto " src="<?=base_url()?>assets/images/avatars/restaurante.png" alt="">
+                                <h1 class="text-center mt-1 font-semibold">DINNER RESTAURANTE</h1>
                             </div>
                             <div class="p-5">
+                                <h1 class="font-semibold">DATA</h1>
+                                <p>24/11/2021 às 20:46</p>
                                 <h1 class="font-semibold" >LOCAL DE ENTREGA</h1>
                                 <p>Av. T-10 Setor Bueno, SP - São Paulo, Brasil</p>
+                                <h1 class="font-semibold">TOTAL</h1>
+                                <p>R$ 164,30</p>
                             </div>
                             <div class="p-5">
-                                <h1 class="font-semibold">VALOR DO PEDIDO</h1>
-                                <p>R$ 164,30</p>
-                               
+                                <h1 class="font-semibold">STATUS</h1>
+                                <p>CONCLUIDO</p>
+                                <h1 class="font-semibold">PEDIDO</h1>
+                                <p>56757</p>
                             </div>
-                            
                             <div class="p-5">
                            
                                 <button class="border-green border p-2 px-3 w-36 mb-2">
                                     <span class="text-green text-base">+</span>
                                     <span class="text-green text-base">DETALHES</span>
                                 </button>
-                                
+                                <button class="border-blue-500 border p-2 px-3 w-36 mb-2">
+                                    <span class="text-blue-500 text-base">+</span>
+                                    <span class="text-blue-500 text-base">CONCLUÍDO</span>
+                                </button>
+                                <button class="border-red-400 border p-2 px-3 w-36 mb-2">
+                                    <span class="text-red-400 text-base">X</span>
+                                    <span class="text-red-400 text-base">CANCELAR</span>
+                                </button>
                            
 
                             </div>
@@ -139,42 +136,43 @@
 
                     <div class="border-gray-400 border mt-2  ">
                         <div class="grid xl:grid-cols-4" >
-                            <!-- <div class="p-5">
-                                <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
-                           
-                            </div> -->
-                            <div class="p-5">
-                                <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
-                                
-                          
-                                
+                            <div class=" ">
+                                <img class="w-32 h-32 mt-2 m-auto " src="<?=base_url()?>assets/images/avatars/restaurante.png" alt="">
+                                <h1 class="text-center mt-1 font-semibold">DINNER RESTAURANTE</h1>
                             </div>
                             <div class="p-5">
+                                <h1 class="font-semibold">DATA</h1>
+                                <p>24/11/2021 às 20:46</p>
                                 <h1 class="font-semibold" >LOCAL DE ENTREGA</h1>
                                 <p>Av. T-10 Setor Bueno, SP - São Paulo, Brasil</p>
+                                <h1 class="font-semibold">TOTAL</h1>
+                                <p>R$ 164,30</p>
                             </div>
                             <div class="p-5">
-                                <h1 class="font-semibold">VALOR DO PEDIDO</h1>
-                                <p>R$ 164,30</p>
-                               
+                                <h1 class="font-semibold">STATUS</h1>
+                                <p>CONCLUIDO</p>
+                                <h1 class="font-semibold">PEDIDO</h1>
+                                <p>56757</p>
                             </div>
-                            
                             <div class="p-5">
                            
                                 <button class="border-green border p-2 px-3 w-36 mb-2">
                                     <span class="text-green text-base">+</span>
                                     <span class="text-green text-base">DETALHES</span>
                                 </button>
-                                
+                                <button class="border-blue-500 border p-2 px-3 w-36 mb-2">
+                                    <span class="text-blue-500 text-base">+</span>
+                                    <span class="text-blue-500 text-base">CONCLUÍDO</span>
+                                </button>
+                                <button class="border-red-400 border p-2 px-3 w-36 mb-2">
+                                    <span class="text-red-400 text-base">X</span>
+                                    <span class="text-red-400 text-base">CANCELAR</span>
+                                </button>
                            
 
                             </div>
                         </div>
                     </div>
-
-                   
                     
     
                 

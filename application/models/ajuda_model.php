@@ -73,6 +73,18 @@ class Ajuda_model extends CI_Model {
         return $this->db->get('ajuda_artigos')->row_array();
 
     }
+
+    public function existeArtigo($id) {
+
+        $this->db->where('id', $id);
+        $data = $this->db->count_all_results('ajuda_artigos');
+
+        if ($data > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
    
     public function getArtigosByCategoria($artigo_categoria) {
 

@@ -50,41 +50,49 @@
 
                        <!-- Form -->
                        <form action="" autocomplete="off" method="post">
-                           <div class="grid md:grid-cols-2 grid-cols-1">
+                           <div class="grid md:grid-cols-2 xl:space-x-4 grid-cols-1">
                                 <div class=" md:span-col-1">
-                                    <label  for="">Nome</label>
-                                    <input class="focus:outline-none border mt-2 border-gray-400 p-2" type="text" maxlength="200" required name="restaurante_nome" >
+                                    <label  for="" class="w-full">Nome</label>
+                                    <input class="focus:outline-none w-full border mt-2 border-gray-400 p-2" type="text" maxlength="200" required name="restaurante_representante_nome" >
                                 </div>
                                 <div class=" md:span-col-1">
                                     <label  for="">Sobrenome</label>
-                                    <input class="focus:outline-none border mt-2 border-gray-400 p-2" type="text" maxlength="200" required name="restaurante_sobrenome">
+                                    <input class="focus:outline-none w-full border mt-2 border-gray-400 p-2" type="text" maxlength="200" required name="restaurante_representante_sobrenome">
                                 </div>
                            </div>
-                           <div class="grid md:grid-cols-2 grid-cols-1">
+                           <div class="grid md:grid-cols-2 xl:space-x-4 grid-cols-1">
                                 <div class=" md:span-col-1">
                                     <label for="telefone">Telefone</label>
-                                    <input id="telefone" class="focus:outline-none border mt-2 border-gray-400 p-2" type="text" maxlength="200" required name="restaurante_telefone">
+                                    <input id="telefone" class="focus:outline-none  w-full border mt-2 border-gray-400 p-2" type="text" maxlength="200" required name="restaurante_representante_telefone">
                                 </div>
                                 <div class=" md:span-col-1">
                                     <label  for="">Email</label>
-                                    <input class=" focus:outline-none border mt-2 border-gray-400 p-2" type="email" maxlength="200" required name="restaurante_email">
+                                    <input class=" focus:outline-none border w-full mt-2 border-gray-400 p-2" type="email" maxlength="200" required name="restaurante_email">
                                 </div>
                            </div>
-                           <div class="grid md:grid-cols-2 grid-cols-1">
+                           <div class="grid md:grid-cols-2 xl:space-x-4 grid-cols-1">
                                 <div class=" md:span-col-1">
                                     <label  for="">Senha</label>
-                                    <input class="focus:outline-none border mt-2 border-gray-400 p-2" type="password" maxlength="200" required name="restaurante_password">
+                                    <input class="focus:outline-none border w-full mt-2 border-gray-400 p-2" type="password" id="restaurante_password" maxlength="200" required name="restaurante_password">
                                 </div>
                                 <div class=" md:span-col-1">
                                     <label  for="">Confirmação de Senha</label>
-                                    <input class="focus:outline-none border mt-2 border-gray-400 p-2" type="password" maxlength="200" required name="restaurante_passoword_confirm">
+                                    <input class="focus:outline-none border mt-2 w-full border-gray-400 p-2"  type="password" id="restaurante_password_confirm" maxlength="200" required name="restaurante_password_confirm">
                                 </div>
                            </div>
 
                            <!-- Termos -->
-                           <div class="flex py-8 justify-center ">
+                           
+                           <?php if ($this->session->flashdata('response')) { ?>
+                            <div class="flex  justify-center">
+                               <p class="text-red-500 mt-3"><?=$this->session->flashdata('response')?></p>
+                           </div>
+
+                            <?php } ?>
+                           <div class="flex py-5 ustify-center ">
+                               
                                 <div>
-                                    <input type="checkbox"  required>
+                                    <input type="checkbox" class="w-5 h-5"  required>
                                 </div>
                                 <div class="ml-3">
                                     <p>Concordo com os <a href="<?=base_url()?>termos" class="font-semibold">Termos e Compromissos</a></p>
@@ -111,5 +119,8 @@
 
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 
 </html>

@@ -2,150 +2,241 @@
 <html lang="pt-br">
 
 <head> 
-    <title>Ecobox - Inscrição de Restaurante</title>
+    <title>Ecobox</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="<?=base_url()?>/assets/images/favicon.png" rel="icon" type="image/png">
     <link rel="stylesheet" href="<?=base_url()?>/assets/css/main.css">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>/assets/slider/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>/assets/slider/slick/slick-theme.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="<?=base_url()?>/assets/images/favicon.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
 </head>
 
+<style>
+    body {
+        font-family: 'Montserrat';
+    }
+    .menuItens:hover {
+        color: #6A9F46;
+    }
+
+    input[type='radio'] {
+    display: none;
+    }
+
+    #generoMasculino, #generoFeminino {
+        cursor: pointer;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        outline: none;
+        border: 2px solid #6A9F46;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #generoMasculino:checked:before, #generoFeminino:checked:before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #6A9F46;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+
 <body class="bg-gray-100">
-  
-    <div class="grid lg:grid-cols-4 col-span-1">
-        <!-- Sidebar -->
-        <div class="grid col-span-1 bg-white hidden lg:block ">
-           
-            <div class="w-full border-b border-gray-200 flex p-3  space-x-2 ">
-                <p class="rounded-full bg-green py-3 px-5 text-white">1</p>
-                <p class="text-lg py-2">Informações Básicas</p>
-            </div>
-            <div class="w-full border-b border-gray-200 flex p-3 space-x-2 ">
-                <p class="rounded-full bg-green-80 py-3 px-5 text-white">1</p>
-                <p class="text-lg py-2">Termos</p>
-            </div>
-            <div class="w-full border-b border-gray-200 flex p-3 space-x-2 ">
-                <p class="rounded-full bg-green-80 py-3 px-5 text-white">1</p>
-                <p class="text-lg py-2">Horário de Funcionamento</p>
-            </div>
-            <div class="w-full border-b border-gray-200 flex p-3 space-x-2 ">
-                <p class="rounded-full bg-green-80 py-3 px-5 text-white">1</p>
-                <p class="text-lg py-2">Documentação</p>
-            </div>
-            <div class="w-full border-b border-gray-200 flex p-3 space-x-2 ">
-                <p class="rounded-full bg-green-80 py-3 px-5 text-white">1</p>
-                <p class="text-lg py-2">Aprovação</p>
-            </div>
-        </div>
-        <!-- Fim Sidebar -->
+    <section>
+        <!-- Início Navbar -->
+        <header class="w-full fixed z-50">
+            <?php $this->load->view('comp/on/restaurante/navbar_pendente')?>
+        </header>
+        <!-- Fim Navbar -->
 
-        <!-- Container -->
-        <div class="grid pt-0 p-5 lg:col-span-3 col-span-1 ">
+        <main class="pt-16">
+            <div class="grid grid-cols-1 py-5 md:py-14 px-5 md:px-14 lg:px-24 xl:px-32"> 
+                <div class="col-span-1 bg-white px-5 py-5 md:px-8 lg:px-14 md:py-8 lg:py-10 h-auto">
+                    <h1 class="font-semibold text-xl md:text-2xl text-center md:text-left text-gray-700 ">Crie seu Restaurante</h1>
+                    <p class="pb-8">Insira as informações da sua restaurante</p>
 
-            <div class="bg-white lg:mt-0 mt-12">
-                <!-- Titulo -->
-                <div class="lg:mt-0 mt-5">
-                    <p class="text-xl text-black pb-0 p-5 font-semibold">Crie seu Restaurante</p>
-                    <p class="mt-1 pl-5">Insira as informações da sua restaurante.</p>
-                </div>
-                <!-- Fim Titulo -->
+                  
+<!-- 
+                    <div class="flex justify-center">
+                        <img class="h-52 w-52 mb-8 rounded-full border-solid border-4 border-green" src="<?=base_url()?>assets/images/avatars/<?=$user['user_imagem']?>" alt=""/>
+                    </div> -->
 
-                <!-- Form -->
-                <form action="" autocomplete="off" method="POST">
+                    <form method="post" enctype="multipart/form-data" action="">
+                        <!-- <div class="grid grid-cols-2 pb-5 md:pb-10">
+                            <div class="col-span-2">
+                                <label for="file" class="font-semibold text-gray-700">Foto de Perfil</label><br>
+                                <input class="pt-2 w-full" type="file" name="user_imagem" accept="image/*"/>
+                            </div>
+                        </div> -->
+                      
 
-                    <div class="grid md:grid-cols-2 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Nome do Restaurante</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
+                        <div class="grid grid-cols-2 flex">
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5">
+                                <label for="nome" class="font-semibold text-gray-700">Nome do Restaurante</label>
+                                <input type="text"  required name="restaurante_nome" maxlength="200"  class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div> 
+                            
+                            <div class="col-span-2 md:col-span-1 pl-0 md:pl-2.5 lg:pl-5">
+                                <label for="sobrenome" class="font-semibold text-gray-700">Seleciona e Imagem do Restaurante</label>
+                                <input type="file" name="restaurante_imagem" accept="image/png"  required class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
                         </div>
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Selecione a Imagem do Restaurante</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none" >
+                        <br><br>
+                        <div class="grid grid-cols-2 flex">
+                            <div class="col-span-2 lg:col-span-1 md:pl-0 ">
+                                <label for="telefone" class="font-semibold text-gray-700">Telefone do Restaurante</label>
+                                <input type="tel" name="restaurante_telefone" required  data-mask="(00) 0 0000-0000" minlength="16"  maxlength="16" autocomplete="off" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="col-span-2 lg:col-span-1 md:pl-0 lg:pl-5">
+                                <label for="telefone" class="font-semibold text-gray-700">Endereço do Restaurante</label>
+                                <input type="text" name="restaurante_endereco" required  maxlength="200" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="grid md:grid-cols-2 pt-0 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Telefone do Restaurante</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
-                        </div>
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Endereço do Restaurante</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none" >
-                        </div>
-                    </div>
+                        <div class="grid grid-cols-2 flex mt-3">
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5">
+                                <label for="telefone" class="font-semibold text-gray-700">Estado</label><Br>
+                               <select  name="restaurante_estado" onchange="getCidades(this.value)" required  class="w-full h-12 pl-3 " >
+                               <option disabled selected value >SELECIONAR OPÇÃO</option>
+                               <?php foreach ($estados as $e) {  ?>
+                                    <option value="<?=$e->Uf?>"><?=$e->Nome?></option>
+                                    <?php }  ?>
+                               </select>
+                            </div>
 
-                    <div class="grid md:grid-cols-2 pt-0 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Tipo de Comida</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
-                        </div>
-                        <div class="grid md:col-span-1 flex">
-                            <label class="mt-2" for="">Tempo de Preparo Médio <small>[MINUTOS]</small></label>
-                            <input type="number" class="lg:w-1/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none" >
-                           
-                        </div>
-                    </div>
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5 lg:pl-5  pt-3 xl:pt-0">
+                                <label for="telefone" required class="font-semibold text-gray-700">Cidade</label><br>
 
-                    <div class="grid md:grid-cols-2 pt-0 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Pessoa Jurídica</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
+                                <select name="restaurante_cidade" required id="cidades" class="w-full h-12 pl-2" >
+                                 
+                                <option disabled selected value >SELECIONAR OPÇÃO</option>
+                                </select>
+                            </div>
+                            
+                            
                         </div>
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Tipo de Documento</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none" >
+                        <br><br>
+                        <div class="grid grid-cols-2 flex mt-3">
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5">
+                                <label for="identidade" class="font-semibold text-gray-700">Tipo de Comida</label><br>
+                                <select name="restaurante_categoria" required class="w-full h-12 pl-2 uppercase" >
+                                    <option disabled selected value  >SELECIONAR OPÇÃO</option>
+                                    <?php foreach ($categorias as $c) {  ?>
+                                        <option class="uppercase" value="<?=$c->id?>"><?=$c->cat_nome?></option>
+                                    <?php }  ?>
+                               </select>
+                                </select>
+                               
+                            </div>
+                            
+                            <div class="col-span-2 md:col-span-1 pl-0 md:pl-2.5 lg:pl-5">
+                                <label for="nascimento" class="font-semibold text-gray-700">Tempo de Preparo Médio [Em minutos]</label>
+                                <input type="number" name="restaurante_preparo_medio" data-mask="00" required minlength="1"  maxlength="2" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 pt-0 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Razão Social</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
-                        </div>
-                       
-                    </div>
-                    
-                    <hr>
 
-                    <div class="lg:mt-0 mt-5">
-                    <p class="text-xl text-black pb-0 p-5 font-semibold">Informações do representante legal</p>
-
-                    <div class="grid md:grid-cols-2 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Nome </label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
+                        <div class="grid grid-cols-2 flex">
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5">
+                                <label for="identidade" class="font-semibold text-gray-700">CNPJ do Restaurante</label>
+                                <input type="text" name="restaurante_cnpj" inputmode="number" required data-mask="00.000.000.0000/00" minlength="18"  maxlength="18"  class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="col-span-2 md:col-span-1 pl-0 md:pl-2.5 lg:pl-5">
+                                <label for="nascimento" class="font-semibold text-gray-700">Razão Social</label>
+                                <input type="text" name="restaurante_razao_social"  maxlength="200" required  class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
                         </div>
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Sobrenome</label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none" >
+
+                                <br>
+                        <h1 class="font-semibold text-xl md:text-2xl text-center md:text-left text-gray-700 ">Informações do representante legal</h1>
+                                <Br>
+                        <div class="grid grid-cols-2 flex">
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5">
+                                <label for="identidade" class="font-semibold text-gray-700">Nome</label>
+                                <input type="text" required name="restaurante_representante_nome" maxlength="200"   class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="col-span-2 md:col-span-1 pl-0 md:pl-2.5 lg:pl-5">
+                                <label for="nascimento" class="font-semibold text-gray-700">Sobrenome</label>
+                                <input type="text" required name="restaurante_representante_sobrenome"  maxlength="200"  class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid md:grid-cols-2 p-5">
-                        <div class="grid md:col-span-1">
-                            <label class="mt-2" for="">Documento </label>
-                            <input type="text" class="lg:w-5/6 w-full p-3 mt-2 border border-gray-300 h-12 focus:outline-none"  >
+
+                        <div class="grid grid-cols-2 flex">
+                            <div class="col-span-2 md:col-span-1 pr-0 md:pr-2.5 lg:pr-5">
+                                <label for="identidade" class="font-semibold text-gray-700">CPF do Representante</label>
+                                <input type="text" required name="restaurante_representante_cpf"  data-mask="000.000.000-00" minlength="14"  maxlength="14"  class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none">
+                            </div>
+                   
                         </div>
-                        
-                    </div>
 
 
-                    <div class="flex  mt-12 mb-12 justify-center">
-                        <button class="bg-green text-xl px-12 py-2 text-white ">
-                            CONTINUAR
+                   
+ 
+                    <div class="grid justify-center md:justify-center">
+                        <button type="submit" class="w-auto h-12 px-20 mb-5 mt-14 xl:mt-10 rounded-md bg-green" >
+                            <p class="font-semibold text-white text-xl">CONTINUAR</p>
                         </button>
-
                     </div>
+                    </form>
+
                 </div>
+            </div>  
+        </main>
+    </section>
 
-                </form>
-                <!-- Fim Form -->
-            </div>
-        </div>
-        <!-- Fim Container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>/assets/js/mascaraCelular.js"></script>
+<script type="text/javascript" src="<?=base_url()?>/assets/js/mascaraData.js"></script>
+<script>
+                        $("input:checkbox").on('click', function() {
+                        // in the handler, 'this' refers to the box clicked on
+                      
+                        var $box = $(this);
+                        if ($box.is(":checked")) {
+                            // the name of the box is retrieved using the .attr() method
+                            // as it is assumed and expected to be immutable
+                            var group = "input:checkbox";
+                            // the checked state of the group/box on the other hand will change
+                            // and the current value is retrieved using .prop() method
+                            $(group).prop("checked", false);
+                            $box.prop("checked", true);
+                        } else {
+                            $box.prop("checked", false);
+                        }
+                        });
+</script>
 
-    </div>
+<script>
+   function getCidades(e) {
+       
+
+        $.ajax({
+        type: "POST",
+        url: './getcidades',
+        data: {estado:e}, // serializes the form's elements.
+        success: function(data)
+        {
+            $('#cidades').html("")
+            $('#cidades').append(data)
+        }
+    });
+   }
+</script>
 </body>
-
 </html>

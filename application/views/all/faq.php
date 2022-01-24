@@ -34,7 +34,7 @@
         <!-- Fim Navbar -->
 
         <main class="pt-16 pb-14">
-            <div class="grid md:grid-cols-12 lg:grid-cols-9 xl:grid-cols-7 bg-green w-full h-96 items-center px-5 md:px-0">
+            <div class="grid md:grid-cols-12 lg:grid-cols-9 xl:grid-cols-7 bg-green w-full h-52 items-center px-5 md:px-0">
                 <div class="md:col-span-2"></div>
 
                 <div class="md:col-span-8 lg:col-span-5 xl:col-span-3 w-full grid justify-items-center">
@@ -42,12 +42,12 @@
                     <p class="text-white text-lg md:text-xl text-center pt-2">Nossa central de ajuda aos usuários</p>
 
                     <!-- Início Barra Pesquisa -->
-                    <div class="flex justify-center items-center w-full pt-10">
+                    <!-- <div class="flex justify-center items-center w-full pt-10">
                         <input class="w-full h-14 px-3 bg-white placeholder-gray-500 focus:outline-none text-lg" type="text" placeholder="Qual sua dúvida?">
                         <button class="w-14 h-14 px-2 flex justify-center items-center bg-green border-2 border-white">
                             <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
                         </button>
-                    </div>
+                    </div> -->
                     <!-- Fim Barra Pesquisa -->
                 </div>
 
@@ -55,46 +55,34 @@
             </div>
 
             <!-- Início Box Perguntas 1 -->
-            <div class="grid md:grid-cols-12 xl:grid-cols-10 px-5 md:px-0"> 
-                <div class="md:col-span-1 lg:col-span-2"></div>
 
-                <div class="md:col-span-10 lg:col-span-8 xl:col-span-6 pt-16">
-                    <h1 class="font-semibold text-gray-700 text-xl md:text-2xl">PAGAMENTOS</h1>
+                <?php  foreach ($categorias as $c) {   ?>
+                        <div class="grid md:grid-cols-12 xl:grid-cols-10 px-5 md:px-0"> 
+                        <div class="md:col-span-1 lg:col-span-2"></div>
 
-                    <div class="py-4 px-5 my-4 bg-white items-center border-b border-gray-200 border-opacity-50 shadow">
-                        <a href="<?=base_url()?>faq_artigo">
-                            <div class="flex items-center justify-between">
-                                <h1 class="text-lg text-gray-700">Lorem Ipsum is simply dummy text of the printing</h1>
-                                <img  class="h-5" src="<?=base_url()?>assets/images/seta.svg" alt=""/> 
+                            <div class="md:col-span-10 lg:col-span-8 xl:col-span-6 pt-16">
+                                <h1 class="font-semibold text-gray-700 text-xl md:text-2xl"><?=$c->categoria_nome?></h1>
+
+                                <?php  foreach ($this->ajuda_model->getArtigosByCategoria($c->id) as $a) {   ?>
+                                    <div class="py-4 px-5 my-4 bg-white items-center border-b border-gray-200 border-opacity-50 shadow">
+                                        <a href="<?=base_url()?>faq/<?=$a->id?>">
+                                            <div class="flex items-center justify-between">
+                                                <h1 class="text-lg text-gray-700"><?=$a->artigo_titulo?></h1>
+                                                <img  class="h-5" src="<?=base_url()?>assets/images/seta.svg" alt=""/> 
+                                            </div>
+                                        </a>   
+                                    </div>
+                                <?php  }  ?>
+
                             </div>
-                        </a>   
-                    </div>
+                        <div class="md:col-span-1 lg:col-span-2"></div>
+                        </div>  
+                 <?php  }   ?>
+              
 
-                    <div class="py-4 px-5 my-4 bg-white items-center border-b border-gray-200 border-opacity-50 shadow">
-                        <a href="<?=base_url()?>faq_artigo">
-                            <div class="flex items-center justify-between">
-                                <h1 class="text-lg text-gray-700">Lorem Ipsum is simply dummy text of the printing</h1>
-                                <img  class="h-5" src="<?=base_url()?>assets/images/seta.svg" alt=""/> 
-                            </div>
-                        </a>   
-                    </div>
-
-                    <div class="py-4 px-5 my-4 bg-white items-center border-b border-gray-200 border-opacity-50 shadow">
-                        <a href="<?=base_url()?>faq_artigo">
-                            <div class="flex items-center justify-between">
-                                <h1 class="text-lg text-gray-700">Lorem Ipsum is simply dummy text of the printing</h1>
-                                <img  class="h-5" src="<?=base_url()?>assets/images/seta.svg" alt=""/> 
-                            </div>
-                        </a>   
-                    </div>
-                </div>
-
-                <div class="md:col-span-1 lg:col-span-2"></div>
-            </div>  
-            <!-- Fim Box Perguntas 1 -->
 
             <!-- Início Box Perguntas 2 -->
-            <div class="grid md:grid-cols-12 xl:grid-cols-10 px-5 md:px-0"> 
+            <!-- <div class="grid md:grid-cols-12 xl:grid-cols-10 px-5 md:px-0"> 
                 <div class="md:col-span-1 lg:col-span-2"></div>
 
                 <div class="md:col-span-10 lg:col-span-8 xl:col-span-6 pt-16">
@@ -129,7 +117,7 @@
                 </div>
 
                 <div class="md:col-span-1 lg:col-span-2"></div>
-            </div>  
+            </div>   -->
             <!-- Fim Box Perguntas 2 -->
         </main>
     </section>

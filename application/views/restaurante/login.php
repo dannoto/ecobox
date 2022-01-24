@@ -54,23 +54,24 @@
                         </div>
                     
                         <!-- Início Formulário -->
-                        <form action="" method="POST" class="">
+                        <form  method="POST" class="">
                             <label for="email" class="font-semibold text-gray-700">E-mail</label>
-                            <input type="email" name="user_email" maxlength="200" id="email" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none" required maxlength="200">
+                            <input type="email" name="restaurante_email" maxlength="200" id="email" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none" required maxlength="200">
 
                             <label for="password" class="font-semibold text-gray-700">Senha</label>
-                            <input type="password" name="user_password" minlength="6" maxlength="200" id="password" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none" required maxlength="200">
+                            <input type="password" name="restaurante_password" minlength="6" maxlength="200" id="password" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none" required maxlength="200">
 
                             <a class="pb-10" href="<?=base_url()?>recuperacao">
                                 <p id="recuperarSenha" class="text-gray-700">Recuperar minha senha</p>
                             </a>
+                           
 
                             <button type="submit" class="w-full mb-5 mt-14 xl:mt-10 h-12 rounded-md bg-green" >
                                 <p class="font-semibold text-white text-xl">Entrar</p>
                             </button>
 
 
-                            <p class="text-gray-700">Não tem uma conta? <a href="<?=base_url()?>cadastro" class="text-green font-semibold">Cadastre-se</a></p>
+                            <p class="text-gray-700">Não tem uma conta? <a href="<?=base_url()?>restaurante/registro" class="text-green font-semibold">Cadastre-se</a></p>
                         </form>
                         <!-- Fim Formulário -->
                     </div>

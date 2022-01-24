@@ -57,19 +57,19 @@ class Perfil_model extends CI_Model {
         return $this->db->update('usuarios', $data);
     }
 
-    public function updateSeguranca($id, $old_password, $new_password) {
+    public function updateSeguranca($id, $user_current_password, $user_new_password) {
 
         $this->db->where('id', $id);
-        $this->db->where('user_password', md5($old_password));
+        $this->db->where('user_password', md5($user_current_password));
 
         $data = array (
-            'user_password' => md5($new_password),
+            'user_password' => md5($user_new_password),
         );
 
         return $this->db->update('usuarios', $data);
     }
 
-    
+      
     
 
 
