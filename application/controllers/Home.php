@@ -9,6 +9,9 @@ class Home extends CI_Controller {
 	
 		$this->load->model('auth_model');
 		$this->load->model('perfil_model');
+		$this->load->model('restaurante_model');
+		$this->load->model('categorias_model');
+		$this->load->model('carrinho_model');
 		
 	}
 

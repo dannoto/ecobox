@@ -10,6 +10,7 @@ class Informacoes extends CI_Controller {
 	
 		$this->load->model('auth_model');
 		$this->load->model('perfil_model');
+		$this->load->model('carrinho_model');
 		
 	}
 

@@ -25,7 +25,7 @@ class Categorias_model extends CI_Model {
         return $this->db->update('categorias', $data);
     }
 
-    public function getCategorias($id) {
+    public function getCategorias() {
         return $this->db->get('categorias')->result();
     }
 

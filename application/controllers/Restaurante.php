@@ -13,6 +13,7 @@ class Restaurante extends CI_Controller {
 		$this->load->model('location_model');
 		$this->load->model('cardapio_model');
 		$this->load->model('produtos_model');
+		$this->load->model('carrinho_model');
 
 
 		// if ($this->session->userdata('session_restaurante')) {
@@ -39,12 +40,42 @@ class Restaurante extends CI_Controller {
 	public function perfil($slug = null)
 	{
 		$rest = $this->session->userdata('session_restaurante');
+		$usr = $this->session->userdata('session_user');
 		
         $slug = htmlspecialchars($slug);
 	
         if (strlen($slug) > 0 ) {
 		
+			//Verifica se o restaurante existe.
 			if ($this->restaurante_model->existeRestaurante($slug)) {
+
+
+
+				//add Produto Carrinho
+				if ($this->input->post('add_produto_carrinho')) {
+
+					$carrinho_user = $usr['id'];
+					$carrinho_produto = $this->input->post('produto_id');
+					$carrinho_restaurante = $this->input->post('produto_restaurante');
+					$carrinho_valor = $this->input->post('produto_valor');
+					$carrinho_quantidade = $this->input->post('produto_quantidade');
+
+					//Verifica se ja existe produto
+					if ($this->carrinho_model->existeProdutoCarrinho($carrinho_user, $carrinho_produto) ) {
+					
+						//Somando quantidade
+						$nova_quantidade = $this->carrinho_model->getQuantidadeProdutoCarrinho($carrinho_user, $carrinho_produto);
+						$this->carrinho_model->somaProdutoCarrinhoQuantidade($carrinho_user, $carrinho_produto, $carrinho_quantidade, $nova_quantidade);
+					
+					} else {
+				
+						//Adicionando produto no carrinho
+						$this->carrinho_model->insertProdutoCarrinho($carrinho_user, $carrinho_restaurante, $carrinho_produto, $carrinho_valor, $carrinho_quantidade);
+					
+					}
+
+
+				}
 
 				$data = array (
 					'cardapios' => $this->cardapio_model->getCardapios($slug),

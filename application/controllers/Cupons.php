@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Carrinho extends CI_Controller {
+class Cupons extends CI_Controller {
 	function __construct() {
 
 		parent::__construct();
@@ -13,18 +13,12 @@ class Carrinho extends CI_Controller {
         $this->load->model('carrinho_model');
 		$this->load->model('restaurante_model');
 		$this->load->model('produtos_model');
-		
+		$this->load->model('cupom_model');
 	}
 	public function index()
 	{
 
-		if (!null == $this->input->post("delete_carrinho_produto")) {
 
-			$carrinho_produto = $this->input->post("carrinho_produto");
-			$this->carrinho_model->deleteProduto($carrinho_produto);
-
-		}
-
-		$this->load->view('user/perfil/carrinho');
+		$this->load->view('user/perfil/cupons');
 	}
 }

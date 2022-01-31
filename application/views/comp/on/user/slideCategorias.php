@@ -45,13 +45,22 @@
 
     <div class="col-span-12 md:col-span-10 lg:col-span-8 py-6">
         <div class="categorias">
+            <?php foreach($this->categorias_model->getCategorias() as $c) { ?>
+                
+                <div class="containerSlide">
+                    <a href="">
+                        <div style="background-image: url('<?=base_url()?>assets/images/categorias/<?=$c->cat_imagem?>')" class="imgSlide bg-cover bg-center rounded-lg"></div>
+                        <p class="font-normal text-sm text-center pt-1 titleSlide"><?=$c->cat_nome?></p>
+                    </a>
+                </div>
+            <?php } ?>
             
             <!-- <div class="containerSlide">
                 <a href="">
                     <div style="background-image: url('<?=base_url()?>assets/images/categorias/brasileira.jpg')" class="imgSlide bg-cover bg-center rounded-lg"></div>
                     <p class="font-normal text-sm text-center pt-1 titleSlide">Brasileira</p>
                 </a>
-            </div>
+
 
             <div class="containerSlide">
                 <a href="">

@@ -103,9 +103,18 @@
                                             <div class="flex justify-between  pb-1">
                                                 <h1 class="titulo font-semibold text-lg text-gray-700"><?=$p->produto_nome?></h1>
                                                
-                                                <span onclick="addProdutoModal(<?=$p->id?>)" style="cursor:pointer;" >
-                                                    <img class="h-7 pointer pl-2" src="<?=base_url()?>assets/images/plus.svg" alt=""/>
-                                                </span>
+                                                <?php if ($this->session->userdata('session_user')) { ?>
+                                                    <span style="cursor:pointer" onclick="addProdutoModal('<?=$p->id?>','<?=$p->produto_nome?>','<?=$p->produto_descricao?>','<?=$p->produto_valor?>','<?=$p->produto_imagem?>','<?=$p->produto_restaurante?>')"  >
+                                                        <img class="h-7 pointer pl-2" src="<?=base_url()?>assets/images/plus.svg" alt=""/>
+                                                    </span>
+
+                                                <?php } else { ?>
+                                                    <a href="<?=base_url()?>login">
+                                                        <span  style="cursor:pointer;" >
+                                                            <img class="h-7 pointer pl-2" src="<?=base_url()?>assets/images/plus.svg" alt=""/>
+                                                        </span>
+                                                    </a>
+                                                <?php  } ?>
                                             </div>
                                             
                                             <div class="pr-2">
@@ -116,49 +125,7 @@
                                     
                                     </div>
 
-                                     <!-- MODAL ADD PRODUTO -->
-                                        <div id="overlayModalProduto-<?=$p->id?>" style="overflow: scroll;" class="hidden bg-black bg-opacity-75 fixed inset-0 justify-center items-center z-50">
-                                            <div class="bg-white w-11/12 lg:w-4/6 xl:w-2/2 ">
-                                                <div class="flex justify-between items-center    py-3 p-3 ">
-                                                    <h1 class="text-black text-base sm:text-lg pl-4 font-semibold"><?=$p->produto_nome?></h1>
-                                                    <span onclick="closeAddProdutoModal(<?=$p->id?>)" style="font-size:30px;cursor:pointer;margin-right:15px" class="font-semibold text-black ">x</span>
-                                                </div>
-
-                                                <!-- <form action="" id="form-add-produto"> -->
-                                                    <div class=" grid grid-cols-2 " >
-                                                        <div class=" col-span-2 xl:col-span-1 pl-5 pr-5">
-                                                            <img src="<?=base_url()?>assets/images/produtos/<?=$p->produto_imagem?>" class="w-full h-60" style="object-fit: cover;" alt="">
-                                                        </div>
-                                                        <div>
-
-                                                        <div class="col-span-2 xl:col-span-1 w-full xl:pt-0 pt-3 xl:pl-0 pl-5 ">
-                                                            <div>
-                                                            <button class="px-3 py-2 border border-gray-400 text-semibold">-</button>
-                                                            <input  class=" py-2 w-16 text-center border border-gray-400" maxlength="3" type="text" value="1">
-                                                            <button class="px-3 py-2 border border-gray-400 text-semibold">+</button>
-                                                            </div>
-                                                            
-
-                                                            <div class=" w-full">
-                                                                <p class="text-green font-semibold text-sm pt-3">DESCRIÇÃO</p>
-                                                                <p class="text-sm pt-2 w-2/2 pt-3"><?=$p->produto_descricao?></p>
-                                                            </div>
-                                                        </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="xl:flex online-block  justify-between p-5 items-center gap-2  ">
-                                                        <h2 class="text-semibold pb-3 xl:pb-0">SUBTOTAL: <span class="font-semibold text-xl"> R$ <?=$p->produto_valor?></span></h2>
-                                                        <button class="text-sm text-green pb-5 xl:pb-0 ">ADICIONAR E CONTINUAR COMPRANDO</button>
-                                                        <button class="px-3 py-3 bg-green font-base uppercase text-white">ADICIONAR E PAGAR</button>
-                                                    </div>
-                                                
-                                                <!-- </form> -->
-                                            
-                                            </div>
-                                        </div>
-                                    <!-- MODAL ADD PRODUTO -->
+                                  
 
                                 <?php } ?>
 
@@ -174,7 +141,106 @@
     </section>
 
 
-                           
+                                        <!-- MODAL ADD PRODUTO -->
+                                        <div id="overlayModalProduto" style="overflow: scroll;" class="hidden bg-black bg-opacity-75 fixed inset-0 justify-center items-center z-50">
+                                            <div class="bg-white w-11/12 lg:w-4/6 xl:w-2/2 ">
+                                                <div class="flex justify-between items-center    py-3 p-3 ">
+                                                    <h1 class="text-black text-base sm:text-lg produto_nome pl-4 font-semibold"></h1>
+                                                    <span onclick="closeAddProdutoModal()" style="font-size:30px;cursor:pointer;margin-right:15px" class="font-semibold text-black ">x</span>
+                                                </div>
+
+                                                <!-- <form action="" id="form-add-produto"> -->
+                                                    <div class=" grid grid-cols-2 " >
+                                                        <div class=" col-span-2 xl:col-span-1 pl-5 pr-5">
+                                                            <img src="" class="w-full h-60 produto_imagem" style="object-fit: cover;" alt="">
+                                                        </div>
+                                                        <div>
+
+                                                        <div class="col-span-2 xl:col-span-1 w-full xl:pt-0 pt-3 xl:pl-0 pl-5 ">
+                                                            <div>
+                                                            
+                                                                <input type="hidden" class="produto_id_input" >
+                                                                <input type="hidden" class="produto_restaurante_input">
+                                                                <input type="hidden" class="produto_valor_input">
+                                                                
+                                                                
+                                                                <button onclick="addMinus()" class="px-5 py-2 border border-gray-400 text-semibold">-</button>
+                                                                <input disabled  class=" py-2 w-16 text-center border border-gray-400 produto_quantidade_input"  maxlength="3"  type="text" value="1">
+                                                                <button onclick="addPlus()" class="px-5 py-2 border border-gray-400 text-semibold">+</button>
+                                                            </div>
+                                                            
+
+                                                            <div class=" w-full">
+                                                               
+                                                                <p class="text-green font-semibold text-sm pt-3">DESCRIÇÃO</p>
+                                                                <p class="text-sm pt-2 w-2/2 pt-3 produto_descricao"></p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="xl:flex online-block  justify-between p-5 items-center gap-2  ">
+                                                        <h2 class="text-semibold pb-3 xl:pb-0">SUBTOTAL: <span class="font-semibold text-xl"> R$ <span class="produto_valor"></span></span></h2>
+                                                        <button onclick="addProdutoAndClose()" class="text-sm text-green pb-5 xl:pb-0 ">ADICIONAR E CONTINUAR COMPRANDO</button>
+                                                        <button onclick="addProdutoAndPay()" class="px-3 py-3 bg-green font-base uppercase text-white">ADICIONAR E PAGAR</button>
+                                                    </div>
+                                                
+                                                <!-- </form> -->
+                                            
+                                            </div>
+                                        </div>
+                                    <!-- MODAL ADD PRODUTO -->
+
+                                    <script>
+                                        function addPlus() {
+
+                                            let quantidade =  $('.produto_quantidade_input').val()
+                                            let preco = $('.produto_valor_input').val()
+
+                                            
+                                  
+                                            let y = ++quantidade
+                                            let total = y * preco
+                                            // alert(preco)
+
+                                            
+
+                                            
+                                        
+                                           if (quantidade < 51) {
+                                             
+                                                $('.produto_quantidade_input').val(y)
+                                                $('.produto_valor').html(total.toFixed(2))
+                                            
+                                           }
+                                        }
+
+                                        function addMinus() {
+
+                                            let quantidade = $('.produto_quantidade_input').val()
+                                            let preco = $('.produto_valor_input').val()
+
+                                            var y = 1
+                                            if (quantidade == 1) {
+                                                var y = 1
+                                            } else {
+                                                var y = quantidade-1
+                                            }
+
+                                       
+
+                                           
+                                            let total = y * preco
+
+                                            
+
+                                            $('.produto_quantidade_input').val(y)
+                                            $('.produto_valor').html(total.toFixed(2))
+                                       
+
+                                        }
+                                    </script>                      
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -205,18 +271,41 @@ $(document).ready(function ()
 
 <script>
 
-    function closeAddProdutoModal(id) {
+    function closeAddProdutoModal() {
+      
+        $(".produto_imagem").attr("src", '');
+        $('.produto_nome').html('')
+        $('.produto_quantidade').val('1')
+        $('.produto_descricao').html('')
+        $('.produto_valor').html('')
 
-        const element = '#overlayModalProduto-'+id
+        const element = '#overlayModalProduto'
 
         $(element).addClass('hidden');
         $(element).removeClass('flex');
     }
 
-    function addProdutoModal(id) {
+  
+
+    function addProdutoModal(id,produto_nome, produto_descricao, produto_valor, produto_imagem, produto_restaurante) {
+        
+
+        const url = "<?=base_url()?>assets/images/produtos/"+produto_imagem
+     
+        $(".produto_imagem").attr("src",url);
+        $('.produto_nome').html(produto_nome)
+        $('.produto_descricao').html(produto_descricao)
+        $('.produto_valor').html(produto_valor)
+        
 
 
-        const element = '#overlayModalProduto-'+id
+        $('.produto_id_input').val(id)
+        $('.produto_valor_input').val(produto_valor)
+        $('.produto_restaurante_input').val(produto_restaurante)
+        $('.produto_quantidade_input').val('1')
+   
+
+        const element = '#overlayModalProduto'
        
    
         $(element).removeClass('hidden');
@@ -225,5 +314,48 @@ $(document).ready(function ()
 
 </script>
 
+
+<script>
+
+    function addProdutoAndPay() {
+
+        const id = $('.produto_id_input').val()
+        const restaurante = $('.produto_restaurante_input').val()
+        const valor = $('.produto_valor_input').val()
+        const quantidade = $('.produto_quantidade_input').val()
+
+    
+ 
+        $.ajax({
+            type: "POST",
+            data: {add_produto_carrinho:'.',produto_id:id,produto_restaurante:restaurante,produto_valor:valor, produto_quantidade:quantidade}, 
+            success: function(data)
+            {
+               window.location.href = "<?=base_url()?>carrinho"
+            }
+        });
+
+
+    }
+
+    function addProdutoAndClose() {
+
+        const id = $('.produto_id_input').val()
+        const restaurante = $('.produto_restaurante_input').val()
+        const valor = $('.produto_valor_input').val()
+        const quantidade = $('.produto_quantidade_input').val()
+
+    
+ 
+        $.ajax({
+            type: "POST",
+            data: {add_produto_carrinho:'.',produto_id:id,produto_restaurante:restaurante,produto_valor:valor, produto_quantidade:quantidade}, 
+            success: function(data)
+            {
+              location.reload()
+            }
+        });
+    }
+</script>
 </body>
 </html>

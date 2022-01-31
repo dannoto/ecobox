@@ -100,6 +100,10 @@ class Restaurante_model extends CI_Model {
 
     }
 
+    public function getRestaurantes() {
+        return  $this->db->get('restaurantes')->result();
+    }
+
     public function getRestauranteStatus($id) {
         $this->db->where('id', $id);
         $data = $this->db->get('restaurantes')->row_array();
