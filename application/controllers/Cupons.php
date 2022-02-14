@@ -18,6 +18,7 @@ class Cupons extends CI_Controller {
 	public function index()
 	{
 
+		$this->perfil_model->autenticateUser();
 
 		$this->load->view('user/perfil/cupons');
 	}

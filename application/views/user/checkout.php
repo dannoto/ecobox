@@ -94,11 +94,11 @@
                     <hr>
                     <div class="bg-white  xl:pt-3 pt-1  pl-8 pr-16 space-y-5 pb-5">
                         <div class="xl:flex  inline-block justify-between pb-3 pt-5 ">
-                            <p id="pedido_endereco_view">Av. T-10 Setor Bueno, SP - São Paulo, Brasil</p>
-                            <input type="hidden" value="Av. T-10 Setor Bueno, SP - São Paulo, Brasil" id="pedido_endereco" maxlength="200">
-                            <input type="hidden"  id="pedido_cidade" maxlength="200">
-                            <input type="hidden"   id="pedido_estado" maxlength="200">
-                            <input type="hidden"   id="pedido_cep" maxlength="200">
+                            <p id="pedido_endereco_view"><?=$_COOKIE['endereco']?> <br> <?=$_COOKIE['cidade']?>/<?=$_COOKIE['estado']?> <br>  <small>CEP: <?=$_COOKIE['cep']?></small></p>
+                            <input type="hidden" value="<?=$_COOKIE['endereco']?>"  id="pedido_endereco" maxlength="200">
+                            <input type="hidden"  id="pedido_cidade" value="<?=$_COOKIE['cidade']?>" maxlength="200">
+                            <input type="hidden"   id="pedido_estado" value="<?=$_COOKIE['estado']?>"  maxlength="200">
+                            <input type="hidden"   id="pedido_cep" value="<?=$_COOKIE['cep']?>"  maxlength="200">
                             <button onclick="trocarEnderecoModal()" class="text-green xl:mt-0 mt-3 ">Trocar Endereço</button>
                         </div>
                         <div>
@@ -124,7 +124,7 @@
                             <input type="checkbox"  onchange="setPagamento(this.value)" value="dinheiro"   class="w-7  checkbox-round bg-green text-green h-7 " style="color:#6a9f46;border-radius:100px">
                             <p class="font-semibold ml-5  xl:text-xl text-sm uppercase">DINHEIRO</p>
                            
-                            <input type="hidden" class="text-sm ml-3" id="pedido_troco" >
+                            <input type="hidden" value="" class="text-sm ml-3" id="pedido_troco" >
                         </div>
                         <div class="flex pl-8 pr-8 h-16 p-4" style="border:1px solid #6a9f46; border-radius:10px">
                             <input type="checkbox"  onchange="setPagamento(this.value)" checked value="cartao_credito" class="w-7  checkbox-round bg-green text-green h-7 " style="color:#6a9f46;border-radius:100px">
@@ -140,9 +140,44 @@
                     <!-- Cupom de Desconto -->
                     <div class="bg-white h-14 mt-5 pl-8  flex justify-between ">
                         <h1 class="text-lg font-semibold py-3  h-12">Cupom de Desconto</h1>
-                        <button class="bg-green text-white rounded-xl text-xl  font-semibold px-5 ">+</button>
+                        
+                        <div class="flex justify-center items-center">
+                            <a href="<?=base_url()?>cupons" class="bg-green py-4 text-white rounded-xl text-xl  font-semibold px-5 ">
+                                <button class="text-xl" >+</button>
+                            </a>
+                        </div>
                     </div>
                     <hr>
+                    <?php if (isset($_COOKIE['cupom'])) { ?>
+                        
+                        <?php if ($this->cupom_model->existeCupom($_COOKIE['cupom']) > 0 && $this->cupom_model->limiteCupom($_COOKIE['cupom']) > 0 ) { ?>
+                        
+                            <?php if ($this->cupom_model->minimoCupom($_COOKIE['cupom'],$this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")))) { ?>
+                       
+                            <?php $c = $this->cupom_model->getCupom($_COOKIE['cupom']);  ?>
+
+                            <input type="hidden" id="pedido_desconto" value="<?=$c['cupom_desconto']?>">
+                            <input type="hidden" id="pedido_cupom" value="<?=$c['id']?>">
+                            <div style=" width: 100%;" class="h-40 flex mr-2 p-2 bg-yellow-100 rounded-lg">
+                                        
+                                        <div class="bg-yellow-100 flex  w-full">
+                                            <div class="w-1/2">
+                                            <center>
+                                            <img style="object-fit: cover;" src="<?=base_url()?>assets/images/cupom.png" alt="">
+                                            </center>
+                                            </div>
+                                            <div class="ml-5 w-1/2   mb-2">
+                                                <br>
+                                                <h1 class="text-base font-semibold text-green"> PARABÉNS!</h1>
+                                                <h1 class="text-base font-semibold text-green"> <?=$c['cupom_desconto']?>% DE DESCONTO</h1>
+                                                <br>
+                                            
+                                            </div>
+                                        </div>
+                            </div>
+                             <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
                     <!-- <div class="bg-white  pt-3  pl-8 pr-16 space-y-5 pb-5">
                         <div class="flex justify-between pb-3 pt-5">
                             <p>Av. T-10 Setor Bueno, SP - São Paulo, Brasil</p>
@@ -172,11 +207,75 @@
                             <p>R$ <span><?=$this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido"))?></span></p>
                             <input type="hidden" id="pedido_frete" value="<?=$this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido"))?>">
                         </div>
-                        <!-- <div class="flex justify-between">
-                            <p>Desconto</p>
-                            <p>- R$ <span>7.54</span></p>
-                        </div> -->
+
+                        <?php if (isset($_COOKIE['cupom'])) { ?>
+                            <?php if ($this->cupom_model->existeCupom($_COOKIE['cupom']) > 0 && $this->cupom_model->limiteCupom($_COOKIE['cupom']) > 0 ) { ?>
+                                <?php if ($this->cupom_model->minimoCupom($_COOKIE['cupom'],$this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")))) { ?>
+                                    <?php $c = $this->cupom_model->getCupom($_COOKIE['cupom']);  ?>
+                                    <div class="flex justify-between">
+                                        <p>Desconto</p>
+                                        <p> <?=$c['cupom_desconto']?> %</p>
+                                    </div>
+                             <?php } ?>
+                            <?php } ?>
+                        <?php } ?>
                         <hr>
+
+                     <?php if (isset($_COOKIE['cupom'])) { ?>
+                        <?php if ($this->cupom_model->existeCupom($_COOKIE['cupom']) > 0 && $this->cupom_model->limiteCupom($_COOKIE['cupom']) > 0 ) { ?>
+                            <?php if ($this->cupom_model->minimoCupom($_COOKIE['cupom'],$this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")))) { ?>
+                                <!-- COM DESCONTO -->
+                                <?php $c = $this->cupom_model->getCupom($_COOKIE['cupom']);  ?>
+
+                                <div class="flex justify-between pb-5">
+                                    <p class="font-semibold">TOTAL</p>
+                                    <p class="font-semibold">R$ <span><?=$this->carrinho_model->getCheckoutTotal(
+                                        $this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")),
+                                        $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
+                                        $c['cupom_desconto']
+
+                                    )?></span></p>
+                                    <input type="hidden" id="pedido_total" value="<?=$this->carrinho_model->getCheckoutTotal(
+                                        $this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")),
+                                        $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
+                                        $c['cupom_desconto']
+                                        )?>">
+                                </div>
+                                <!-- COM DESCONTO -->
+                          
+                             <?php } else { ?>
+
+                                <div class="flex justify-between pb-5">
+                                    <p class="font-semibold">TOTAL</p>
+                                    <p class="font-semibold">R$ <span><?=$this->carrinho_model->getCheckoutTotal(
+                                        $this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")),
+                                        $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
+                                        0
+
+                                    )?></span></p>
+                                    <input type="hidden" id="pedido_total" value="<?=$this->carrinho_model->getCheckoutTotal(
+                                        $this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")),
+                                        $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
+                                        0)?>">
+                                </div>
+
+                             <?php } ?>
+                        <?php } else {  ?>
+                            <div class="flex justify-between pb-5">
+                                <p class="font-semibold">TOTAL</p>
+                                <p class="font-semibold">R$ <span><?=$this->carrinho_model->getCheckoutTotal(
+                                    $this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")),
+                                    $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
+                                    0
+
+                                )?></span></p>
+                                <input type="hidden" id="pedido_total" value="<?=$this->carrinho_model->getCheckoutTotal(
+                                    $this->carrinho_model->getTotalByRestaurante($this->input->post("restaurante_pedido")),
+                                    $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
+                                    0)?>">
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
                         <div class="flex justify-between pb-5">
                             <p class="font-semibold">TOTAL</p>
                             <p class="font-semibold">R$ <span><?=$this->carrinho_model->getCheckoutTotal(
@@ -190,6 +289,8 @@
                                 $this->carrinho_model->getRestauranteFrete($this->input->post("restaurante_pedido")),
                                 0)?>">
                         </div>
+                    <?php } ?>
+                       
                     </div>
                   
                     <div class="pt-3">
@@ -340,6 +441,7 @@
     function addTroco() {
         troco =  $('#pedido_troco_modal').val()
      
+        $('#pedido_troco').val(troco)
 
 
         // $('#troco-label').removeClass('flex');
@@ -381,6 +483,9 @@
         const pedido_frete = $('#pedido_frete').val() 
         const pedido_troco = $('#pedido_troco').val()
 
+        const pedido_desconto = $('#pedido_desconto').val()
+        const pedido_cupom = $('#pedido_cupom').val()
+
 
         if (pedido_cidade.length == 0 ) {
             alert('Preencha seu endereço corretamente.')
@@ -407,7 +512,10 @@
                     pedido_user:pedido_user,
                     pedido_cep:pedido_cep,
                     pedido_estado:pedido_estado,
-                    pedido_cidade:pedido_cidade
+                    pedido_cidade:pedido_cidade,
+                    pedido_desconto:pedido_desconto,
+                    pedido_cupom:pedido_cupom,
+                    pedido_troco:pedido_troco
 
                 }, // serializes the form's elements.
                 success: function(data)

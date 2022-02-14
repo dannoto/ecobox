@@ -18,6 +18,8 @@ class Carrinho extends CI_Controller {
 	public function index()
 	{
 
+		$this->perfil_model->autenticateUser();
+
 		if (!null == $this->input->post("delete_carrinho_produto")) {
 
 			$carrinho_produto = $this->input->post("carrinho_produto");

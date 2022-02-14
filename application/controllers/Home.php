@@ -12,11 +12,26 @@ class Home extends CI_Controller {
 		$this->load->model('restaurante_model');
 		$this->load->model('categorias_model');
 		$this->load->model('carrinho_model');
-		
+		$this->load->model('cupom_model');
+		$this->load->model('location_model');
+		      
 	}
 
 	public function index()
 	{
-		$this->load->view('all/home');
+
+		if (isset($_COOKIE['cidade'])) {
+			$cidade = $_COOKIE['cidade'];
+		} else {
+			$cidade = "";
+		}
+
+
+		$data = array(
+			'estados' => $this->location_model->getEstados(),
+			'cidade' => $cidade,
+		);
+
+		$this->load->view('all/home', $data);
 	}
 }

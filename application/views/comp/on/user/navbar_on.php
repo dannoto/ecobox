@@ -25,14 +25,16 @@
     <!-- Fim Logo -->
 
     <!-- Início Barra Pesquisa Navbar -->
-    <form  class="md:col-span-4 hidden md:flex justify-center items-center" action="./busca" method="GET">
-        <div class="md:col-span-4 hidden md:flex justify-center items-center">
-            <input name="q" required class="w-11/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou loja">
+   
+    <div class="md:col-span-4 hidden md:flex w-full justify-center items-center">
+        <form action="<?=base_url()?>busca" class="flex" method="GET">
+            <input autocomplete="off" required name="q" class="w-full query h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou restaurante">
             <button type="submit" class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
                 <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
             </button>
-        </div>
-    </form>
+        </form>
+    </div>
+    
     <!-- Fim Barra Pesquisa Navbar -->
 
     <!-- Início Btn Login e Carrinho -->
@@ -60,14 +62,19 @@
     <div id="overlay" class="fixed hidden justify-center items-center inset-t-16 z-50 left-0 w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12">
         <div class="bg-white h-screen shadow-xl">
             <!-- Início Barra Pesquisa Navbar -->
-            <form action="./busca" method="GET">
-                <div class="flex justify-center items-center pt-5 ">
-                    <input required class="w-9/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" name="q" placeholder="Busque por item ou loja">
-                    <button type="submit" class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
-                        <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
-                    </button>
-                </div>
+           
+           
+       <div class="pt-3 p-3">
+        <form action="<?=base_url()?>busca" class="flex" method="GET">
+                <input autocomplete="off" required name="q" class="w-full query h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou restaurante">
+                <button type="submit" class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
+                    <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
+                </button>
             </form>
+       </div>
+  
+    
+             
             <!-- Fim Barra Pesquisa Navbar -->
             <?php if ($this->session->userdata('session_user')) { ?>
                     <div class="flex space-x-3 items-center px-5 py-5">
@@ -124,5 +131,6 @@
     </div>
 
     <script type="text/javascript" src="<?=base_url()?>/assets/js/modalMenu.js"></script>
+    
 <!-- Fim Menu -->
 

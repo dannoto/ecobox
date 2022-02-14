@@ -19,6 +19,8 @@ class Pedidos extends CI_Controller {
 	}
 	public function index()
 	{   
+
+		$this->perfil_model->autenticateUser();
         $pedido_user = $this->session->userdata('session_user');
 
         if (!null == $this->input->post('update_status')) {

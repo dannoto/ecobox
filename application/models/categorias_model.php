@@ -14,6 +14,12 @@ class Categorias_model extends CI_Model {
         return $this->db->insert('categorias', $data);
     }
 
+    public function existeCategoria($id) {
+        $this->db->where('id',$id);
+        return $this->db->get('categorias');
+
+    }
+
     public function updateCategoria($cat_nome, $cart_descricao, $cat_imagem) {
 
         $data = array(

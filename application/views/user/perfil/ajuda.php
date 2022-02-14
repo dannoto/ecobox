@@ -29,7 +29,12 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/user/navbar_on')?>
+        <?php if ($this->session->userdata('session_user')) { ?>
+                    <?php $this->load->view('comp/on/user/navbar_on')?>
+                <?php } else { ?>
+                    <?php $this->load->view('comp/off/navbar_off')?>
+                    
+                <?php } ?>
         </header>
         <!-- Fim Navbar -->
 

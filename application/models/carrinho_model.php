@@ -29,6 +29,11 @@ class Carrinho_model extends CI_Model {
         return $this->db->get('carrinho_produtos');
     }
 
+    public function getCarrinhoUser( $carrinho_user) {
+        $this->db->where('carrinho_user', $carrinho_user);
+        return $this->db->get('carrinho_produtos')->result();
+    }
+
     public function getQuantidadeProdutoCarrinho($carrinho_user, $carrinho_produto) {
         $this->db->where('carrinho_user', $carrinho_user);
         $this->db->where('carrinho_produto', $carrinho_produto);
@@ -61,8 +66,13 @@ class Carrinho_model extends CI_Model {
 
     public function getCheckoutTotal($carrinho_pedido, $carrinho_frete, $carrinho_desconto) {
 
-        $total  = ($carrinho_pedido + $carrinho_frete - $carrinho_desconto);
-        return $total;
+   
+        // Adicionando desconto
+        $desconto_porcentagem = ($carrinho_desconto/100);
+        $desconto = ($carrinho_pedido * $desconto_porcentagem);
+        $desconto_total = ( ($carrinho_pedido - $desconto) + $carrinho_frete );
+       
+        return $desconto_total;
 
     }
 
@@ -87,6 +97,11 @@ class Carrinho_model extends CI_Model {
     public function getCarrinhoByRestaurante($carrinho_restaurante) {
         $this->db->where('carrinho_restaurante', $carrinho_restaurante); 
         return $this->db->get('carrinho_produtos')->result();
+    }
+
+    public function getCarrinhoAcompanhamento($carrinho_user) {
+        $this->db->where('acompanhamento_user', $carrinho_user); 
+        return $this->db->get('carrinho_acompanhamentos')->result();
     }
 
     public function countCarrinhoByUser($carrinho_user) {
@@ -117,8 +132,9 @@ class Carrinho_model extends CI_Model {
         return $this->db->delete('carrinho_produtos');
     }
 
-    public function deleteCarrinho($carrinho_user) {
+    public function deleteCarrinho($carrinho_user, $carrinho_restaurante) {
         $this->db->where('carrinho_user', $carrinho_user);
+        $this->db->where('carrinho_restaurante', $carrinho_restaurante);
         return $this->db->delete('carrinho_produtos');
     }
 

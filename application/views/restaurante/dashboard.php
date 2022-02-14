@@ -58,7 +58,7 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/restaurante/navbar_pendente')?>
+            <?php $this->load->view('comp/on/restaurante/navbar_on')?>
         </header>
         <!-- Fim Navbar -->
 
@@ -70,37 +70,81 @@
                     
                     <div class="w-full grid xl:grid-cols-2 grid-cols-1 xl:mb-0 mb-5"> 
                         
-                        <div class="xl:col-span-1 grid-cols-2">
+                        <div class="xl:span-col-1 span-col-1">
                             <h1  class=" text-left text-base uppercase  text-gray-700 ">Dashboard</h1>
                             <p class="pb-8 text-xl text-left">Olá <span class="font-semibold text-xl text-green">Dinner Restaurante</span>.</p>
+                        </div>
+                        <div class="xl:span-col-1 mr-12 flex justify-end span-col-1">
+                            <a href="<?=base_url()?>restaurante/cardapio">
+                                <button class="bg-green py-3 px-3 text-sm font-semibold text-white">CONFIGURAR CARDÁPIO</button>
+                            </a>
                         </div>
                       
                     </div>   
 
                     <div class="grid xl:grid-cols-3">
-                        <div class="pl-12 pr-12 xl:pt-0 pt-3">
-                            <h1 class="font-semibold text-green text-center text-lg mb-1">PEDIDOS CONCLUÍDOS</h1>
-                            <div class="border-gray-400 border bg-white">
-                                <h1  style="font-size: 30px;" class="py-8 text-center font-semibold text-xl text-green ">45</h1>
+                            <div class="pl-12 pr-12 xl:pt-0 pt-3">
+                                <h1 class="font-semibold text-green text-center text-lg mb-1">PEDIDOS CONCLUÍDOS</h1>
+                                <div class="border-gray-400 border bg-green">
+                                    <h1  style="font-size: 30px;" class="py-8 text-center font-semibold text-xl text-white ">
+                                        <?=$this->restaurante_model->getPedidosConcluidos($this->session->userdata('session_restaurante')['id']);?>
+                                    </h1>
+                                </div>
                             </div>
-                        </div>
-                        <div class="pl-12 pr-12 xl:pt-0 pt-3">
-                            <h1 class="font-semibold text-yellow-500 text-center text-lg mb-1">PEDIDOS EM ANDAMENTO</h1>
-                            <div class="border-gray-400 border bg-white">
-                                <h1   style="font-size: 30px;" class="py-8 text-center font-semibold  text-xl text-yellow-500">13</h1>
+                            <div class="pl-12 pr-12 xl:pt-0 pt-3">
+                                <h1 class="font-semibold text-green text-center text-lg mb-1">PEDIDOS EM ANDAMENTO</h1>
+                                <div class="border-gray-400 border bg-green">
+                                    <h1   style="font-size: 30px;" class="py-8 text-center font-semibold  text-xl text-white">
+                                        <?=$this->restaurante_model->getPedidosAndamento($this->session->userdata('session_restaurante')['id']);?>
+                                    </h1>
+                                </div>
                             </div>
-                        </div>
-                        <div class="pl-12 pr-12 xl:pt-0 pt-3">
-                            <h1 class="font-semibold text-blue-400 text-center text-lg mb-1">FATURAMENTO MENSAL</h1>
-                            <div class="border-gray-400 border bg-white">
-                                <h1 style="font-size: 30px;" class="py-8 text-center font-semibold  text-xl text-blue-400">R$ 5.6656</h1>
+                            <div class="pl-12 pr-12 xl:pt-0 pt-3">
+                                <h1 class="font-semibold text-green text-center text-lg mb-1">GANHOS TOTAIS</h1>
+                                <div class="border-gray-400 border bg-green">
+                                    <h1 style="font-size: 30px;" class="py-8 text-center font-semibold  text-xl text-white">
+                                        R$  <?=$this->restaurante_model->getPedidosGanhos($this->session->userdata('session_restaurante')['id']);?>
+                                    </h1>
+                                </div>
                             </div>
-                        </div>
                     </div>
+
+                    <br>
+
+                    <div class="grid xl:grid-cols-3">
+                            <div class="pl-12 pr-12 xl:pt-0 pt-3">
+                                <h1 class="font-semibold text-green text-center text-lg mb-1">PEDIDOS CANCELADOS</h1>
+                                <div class="border-gray-400 border bg-green">
+                                    <h1  style="font-size: 30px;" class="py-8 text-center font-semibold text-xl text-white ">
+                                        <?=$this->restaurante_model->getPedidosCancelados($this->session->userdata('session_restaurante')['id']);?>
+                                   </h1>
+                                </div>
+                            </div>
+                            <div class="pl-12 pr-12 xl:pt-0 pt-3">
+                                <h1 class="font-semibold text-green text-center text-lg mb-1">AVALIAÇÃO</h1>
+                                <div class="border-gray-400 border bg-green">
+                                    <h1   style="font-size: 30px;" class="py-8 text-center font-semibold  text-xl text-white">
+                                        <?=$this->restaurante_model->getPedidosAvaliacoes($this->session->userdata('session_restaurante')['id']);?>
+                                   </h1>
+                                </div>
+                            </div>
+                            <div class="pl-12 pr-12 xl:pt-0 pt-3">
+                                <h1 class="font-semibold text-green text-center text-lg mb-1">VENDAS REALIZADAS</h1>
+                                <div class="border-gray-400 border bg-green">
+                                    <h1 style="font-size: 30px;" class="py-8 text-center font-semibold  text-xl text-white">
+                                        <?=$this->restaurante_model->getPedidosVendas($this->session->userdata('session_restaurante')['id']);?>
+                                    </h1>
+                                </div>
+                            </div>
+                    </div>
+
+            
+                    </div>
+            </div>
                     
                     
 
-
+<!-- 
                 <h1 class="text-smibold text-left text-xl mt-12">Ultimos Pedidos</h1>
 
                     <div class="border-gray-400 border mt-2  ">
@@ -137,7 +181,7 @@
 
                    
 
-            </div>  
+            </div>   -->
 
            
 

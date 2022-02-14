@@ -58,7 +58,12 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/user/navbar_on')?>
+        <?php if ($this->session->userdata('session_user')) { ?>
+                    <?php $this->load->view('comp/on/user/navbar_on')?>
+                <?php } else { ?>
+                    <?php $this->load->view('comp/off/navbar_off')?>
+                    
+                <?php } ?>
         </header>
         <!-- Fim Navbar -->
 
@@ -73,13 +78,13 @@
                     <div class="grid xl:grid-cols-2 grid-cols-1 space-x-2">
                     <?php foreach($this->cupom_model->getCupons() as $c) { ?>
                      
-                            <div class="flex span-col-1 border border-gray-100 xl:mt-0 mt-5  ">
-                                <img src="<?=base_url()?>assets/images/cupom.png" alt="">
+                            <div class="flex span-col-1 border border-gray-100 xl:mt-0 mt-5 mb-2 p-5 ">
+                                <img class="hidden xl:flex" style="object-fit: cover;" src="<?=base_url()?>assets/images/cupom.png" alt="">
                                 <div class="ml-5">
-                                    <h1 >COMPRAS ACIMA DE <span class="font-semibold">R$ <?=$c->cupom_limite?></span></h1>
-                                    <h1 class="text-xl font-semibold text-green"> <?=$c->cupom_limite?>% DE DESCONTO</h1>
+                                    <h1 class="xl:text-base  text-sm" >COMPRAS ACIMA DE <span class="font-semibold">R$ <?=$c->cupom_limite?></span></h1>
+                                    <h1 class="xl:text-lg text-smfont-semibold text-green"> <?=$c->cupom_desconto?>% DE DESCONTO</h1>
                                     <br>
-                                    <button onclick="useCupom(this.id)" id=" <?=$c->id?>"  class="bg-green  text-white font-semibold text-center py-3 px-2">USAR AGORA</button>
+                                    <button onclick="useCupom(this.id)" id="<?=$c->id?>"  class="bg-green text-sm text-white font-semibold text-center py-2 px-2">USAR AGORA</button>
                                 </div>
                             </div>
                         
@@ -137,7 +142,29 @@
 
     }
 </script>
+<script>
 
+
+function setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+
+
+function useCupom(id) {
+   
+  setCookie('cupom',id,'30')
+
+  window.location.href = "<?=base_url()?>carrinho"
+}
+
+</script>
 
 </body>
 </html>

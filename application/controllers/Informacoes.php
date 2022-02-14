@@ -19,6 +19,9 @@ class Informacoes extends CI_Controller {
 	public function index()
 	{
 
+
+		$this->perfil_model->autenticateUser();
+
 		$usr = $this->session->userdata('session_user');
 
 

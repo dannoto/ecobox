@@ -123,10 +123,11 @@
         <hr class="mb-5">
      </div class="flex bg-white pb-5">
        
-            <span class="font-semibold text-xl mb-5">SUBTOTAL </span>
+            <span class="font-semibold text-xl ml-3 xl:ml-0 mb-5">SUBTOTAL </span>
         
-            <span class=" text-xl">   R$ <?=$this->carrinho_model->getTotalByRestaurante($r->carrinho_restaurante)?></span>
+            <span class="mb-2 text-xl">   R$ <?=$this->carrinho_model->getTotalByRestaurante($r->carrinho_restaurante)?></span>
        
+            <br>
             <br>
     </div>
   
@@ -158,9 +159,19 @@
             
         </main>
     </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <?php if (count($this->carrinho_model->getCarrinhoRestaurante($this->session->userdata('session_user')['id'])) == 0 ) { ?>
+        <div class="xl:pl-12 xl:pr-12  pr-5 pl-5" >
+            <div class="bg-green h-60 mt-3 flex rounded-md justify-center items-center">
+                <p class="xl:text-3xl text-lg text-white font-semibold">Seu carrinho está vazio.</p>
+            </div>
+        </div>
+    <?php } ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>/assets/js/mascaraCelular.js"></script>
+
+
 </body>
 
 </html>

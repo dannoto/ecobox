@@ -16,7 +16,8 @@ class Seguranca extends CI_Controller {
 	public function index()
 	{
  
-
+		$this->perfil_model->autenticateUser();
+		
 		$usr = $this->session->userdata('session_user');
 
 		if ($this->input->post()) {

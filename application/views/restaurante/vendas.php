@@ -58,7 +58,7 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/restaurante/navbar_pendente')?>
+            <?php $this->load->view('comp/on/restaurante/navbar_on')?>
         </header>
         <!-- Fim Navbar -->
 
@@ -71,34 +71,35 @@
                     <div class="w-full grid xl:grid-cols-2 grid-cols-1 xl:mb-0 mb-5"> 
                         
                         <div class="xl:col-span-1 grid-cols-2">
-                            <h1  class="font-semibold text-left text-xl md:text-2xl   text-gray-700 ">Meus Pedidos</h1>
-                            <p class="pb-8 text-left">Configure o cardápio do seu restaurante.</p>
+                            <h1  class="font-semibold text-left text-xl md:text-2xl   text-gray-700 ">Minhas Vendas</h1>
+                            <p class="pb-8 text-left">Suas vendas concluídas no ecobox.</p>
                         </div>
                       
                     </div>   
                     
-                    
-                    <div class="grid xl:grid-cols-3 grid-cols-1 mb-5">
-                        <div class="xl:grid-cols-1 grid-cols-1 mb-3">
+                    <div>
+                        <p>BUSQUE PELO PEDIDO</p>
+                    </div>
+                    <div class="flex W-2/3 ">
+                        <!-- <div class="xl:grid-cols-1 grid-cols-1 mb-3">
                             <label for="" class="mt">Mes</label><br>
                      
                            <select name="" class="border-gray-400 border p-2 w-2/3 h-12 " >
                                <option value="">Janeiro</option>
                            </select>
-                        </div>
-                        <div class="xl:grid-cols-1 grid-cols-1 mb-3 ">
-                            <label for="" class="mt-2" >Ano</label><br>
-                     
-                            <select name="" class="border-gray-400 border p-2 w-2/3 h-12 " >
-                                <option value="">Janeiro</option>
-                            </select>
-                        </div>
-                        <div class="xl:grid-cols-1 grid-cols-1 pt-5">
-                        <button class="h-12 px-4 text-white h-12 bg-green">Buscar</button>
-                        </div>
+                        </div> -->
+                      <form method="get" action="">
+                          <input  name="pedido" required type="text" class="border-gray-400 border p-2 w-2/3 h-12" >
+                          <button class="h-12 px-4 text-white h-12 bg-green">Buscar</button>
+                      </form>
+                      
+                       
+                      
                     </div>
 
                     <!-- Pedidos -->
+                    <?php if (count($vendas) > 0 ) { ?>
+                        <?php foreach ($vendas as $v ) { ?>
 
                     <div class="border-gray-400 border mt-2  ">
                         <div class="grid xl:grid-cols-4" >
@@ -108,73 +109,48 @@
                            
                             </div> -->
                             <div class="p-5">
+                            <h1 class="font-semibold"> PEDIDO</h1>
+                                <p><?=$v->id ?></p>
                                 <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
+                                <p><?=$v->pedido_data ?>  às <?=$v->pedido_hora ?></p>
                                 
                           
                                 
                             </div>
                             <div class="p-5">
                                 <h1 class="font-semibold" >LOCAL DE ENTREGA</h1>
-                                <p>Av. T-10 Setor Bueno, SP - São Paulo, Brasil</p>
+                                <p><?=$v->pedido_endereco?></p>
                             </div>
                             <div class="p-5">
                                 <h1 class="font-semibold">VALOR DO PEDIDO</h1>
-                                <p>R$ 164,30</p>
+                                <p>R$ <?=$v->pedido_total ?></p>
                                
                             </div>
                             
                             <div class="p-5">
-                           
-                                <button class="border-green border p-2 px-3 w-36 mb-2">
-                                    <span class="text-green text-base">+</span>
-                                    <span class="text-green text-base">DETALHES</span>
-                                </button>
+                                    <form action="<?=base_url()?>restaurante/detalhes?vendas=1" method="POST">
+                                        <input type="hidden" name="pedido" value="<?=$v->id ?>">
+
+                                        <button class="border-green border p-2 px-3 w-36 mb-2">
+                                            <span class="text-green text-base">+</span>
+                                            <span class="text-green text-base">DETALHES</span>
+                                        </button>
+                                    </form>
                                 
                            
 
                             </div>
                         </div>
                     </div>
+                    <?php }?>
+               <?php } else { ?>
+                <div class="   mt-5" >
+                <div class="bg-green h-32 rounded-md flex justify-center items-center">
+                    <p class="text-center text-white ">Nenhuma venda encontrada.</p>
+                </div>
+            </div>
 
-                    <div class="border-gray-400 border mt-2  ">
-                        <div class="grid xl:grid-cols-4" >
-                            <!-- <div class="p-5">
-                                <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
-                           
-                            </div> -->
-                            <div class="p-5">
-                                <h1 class="font-semibold">DATA DO PEDIDO</h1>
-                                <p>24/11/2021 às 20:46</p>
-                                
-                          
-                                
-                            </div>
-                            <div class="p-5">
-                                <h1 class="font-semibold" >LOCAL DE ENTREGA</h1>
-                                <p>Av. T-10 Setor Bueno, SP - São Paulo, Brasil</p>
-                            </div>
-                            <div class="p-5">
-                                <h1 class="font-semibold">VALOR DO PEDIDO</h1>
-                                <p>R$ 164,30</p>
-                               
-                            </div>
-                            
-                            <div class="p-5">
-                           
-                                <button class="border-green border p-2 px-3 w-36 mb-2">
-                                    <span class="text-green text-base">+</span>
-                                    <span class="text-green text-base">DETALHES</span>
-                                </button>
-                                
-                           
-
-                            </div>
-                        </div>
-                    </div>
-
-                   
+                <?php }?>
                     
     
                 

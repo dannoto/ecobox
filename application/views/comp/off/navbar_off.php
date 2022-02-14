@@ -25,11 +25,13 @@
     <!-- Fim Logo -->
 
     <!-- Início Barra Pesquisa Navbar -->
-    <div class="md:col-span-4 hidden md:flex justify-center items-center">
-        <input class="w-11/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou loja">
-        <button class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
-            <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
-        </button>
+    <div class="md:col-span-4 hidden md:flex w-full justify-center items-center">
+        <form action="<?=base_url()?>busca" class="flex" method="GET">
+            <input autocomplete="off" required name="q" class="w-full query h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou restaurante">
+            <button type="submit" class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
+                <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
+            </button>
+        </form>
     </div>
     <!-- Fim Barra Pesquisa Navbar -->
 
@@ -38,11 +40,9 @@
         <a href="<?=base_url()?>login">
             <img class="h-6" src="<?=base_url()?>assets/images/login.svg" alt="">
         </a>
-        <a class="flex" href="<?=base_url()?>carrinho">
+        <a class="flex" href="<?=base_url()?>login">
             <img class="h-6" src="<?=base_url()?>assets/images/carrinho.svg" alt="">
-            <div style="background-color: #dbab4f" class="rounded-full w-4 h-4 flex justify-center items-center -mt-2 -ml-2">
-                <p style="font-size: 9px" class="font-semibold text-white">1</p>
-            </div>
+          
         </a> 
     </div>
     <!-- Fim Btn Login e Carrinho -->
@@ -53,12 +53,15 @@
 <div id="overlay" class="fixed hidden justify-center items-center inset-t-16 z-50 left-0 w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12">
     <div class="bg-white h-screen shadow-xl">
         <!-- Início Barra Pesquisa Navbar -->
-        <div class="flex justify-center items-center py-5 md:hidden">
-            <input class="w-9/12 h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou loja">
-            <button class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
-                <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
-            </button>
-        </div>
+        <form action="<?=base_url()?>busca" method="GET">
+            <div class="flex justify-center items-center py-5 ">
+                <input autocomplete="off" name="q" required class="w-9/12 query h-10 px-3 rounded-l-md bg-gray-100 placeholder-gray-500 focus:outline-none" type="text" placeholder="Busque por item ou restaurante">
+                <button type="submit" class="w-10 h-10 px-2 flex justify-center items-center rounded-r-md bg-green">
+                    <img class="h-5" src="<?=base_url()?>/assets/images/search.svg" alt="">
+                </button>
+            </div>
+        </form>
+
         <!-- Fim Barra Pesquisa Navbar -->
 
         <div class="menu px-5">
@@ -80,6 +83,37 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript" src="<?=base_url()?>/assets/js/modalMenu.js"></script>
+
+<!-- <script>
+    function searchMobile() {   
+        const data = $('.query').val();
+        if (data.length == 0 ) {
+            
+        } else {
+
+            window.location.href = "busca?q="+data
+        }
+    }
+</script> -->
+<script>
+            function search() {
+
+            
+                const data = $('.query').val();
+                if (data.length == 0 ) {
+                    
+                } else {
+
+                    window.location.href = "busca?q="+data
+                }
+            }
+
+
+            
+
+        </script>
+
 <!-- Fim Menu -->

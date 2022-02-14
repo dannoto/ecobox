@@ -58,7 +58,12 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/user/navbar_on')?>
+        <?php if ($this->session->userdata('session_user')) { ?>
+                    <?php $this->load->view('comp/on/user/navbar_on')?>
+                <?php } else { ?>
+                    <?php $this->load->view('comp/off/navbar_off')?>
+                    
+                <?php } ?>
         </header>
         <!-- Fim Navbar -->
 
@@ -87,8 +92,27 @@
                                 </div>
                                 <div class="span-col-1 mt-2 ml-3 xl:ml-0 mb-3">
                                     <p class="uppercase font-semibold" >STATUS</p>
-                                    <p><?php if ($p->pedido_status == "1") { echo "<p class='text-yellow-500 font-semibold'>EM ANDAMENTO</p>";} else if ($p->pedido_status == "2") { echo "<p class='text-green font-semibold'>SAIU PARA ENTREGA</p>";} else if ($p->pedido_status == "3") { echo "<p class='text-blue-500 font-semibold'>ENTREGUE</p>";}?></p>
-                                    <p class="uppercase font-semibold">PEDIDOS</p>
+                                    <p><?php
+                                        
+                                        if ($p->pedido_status == "1") {
+
+                                            echo "<p class='text-yellow-500 font-semibold'>EM PREPARO</p>";
+
+                                        } else if ($p->pedido_status == "2") {
+                                            echo "<p class='text-yellow-500 font-semibold'>SAIU PARA ENTREGA</p>";
+                                        } else if ($p->pedido_status == "3") {
+                                            echo "<p class='text-red-500 font-semibold'>CANCELADO </p>";
+                                        } else if ($p->pedido_status == "4") {
+                                            echo "<p class='text-blue-500 font-semibold'>ENTREGUE </p>";
+                                        } else if ($p->pedido_status == "5") {
+                                            echo "<p class='text-green-500 font-semibold'>CONCLUÍDO</p>";
+                                        }
+                                        
+                                        
+                                         
+                                        
+                                        ?></p>
+                                    <p class="uppercase font-semibold">PEDIDO</p>
                                     <p>#<?=$p->id?></p>
                                 </div>
                               
@@ -145,7 +169,7 @@
         $.ajax({
             type: "POST",
             url: '',
-            data: {update_status:'.',pedido_id:id,pedido_status:'3'}, // serializes the form's elements.
+            data: {update_status:'.',pedido_id:id,pedido_status:'5'}, // serializes the form's elements.
             success: function(data)
             {
                 location.reload()

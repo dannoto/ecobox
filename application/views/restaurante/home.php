@@ -9,6 +9,8 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="<?=base_url()?>/assets/images/favicon.jpg">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../dist/jquery.loading.js"></script>
 </head>
 
 <style>
@@ -93,5 +95,21 @@
     </section>
 
 </body>
+
+
+<script>
+      $(".loading-div").each(function() {
+        $(this).css(
+          "background-color",
+          randomColor({
+            luminosity: "dark"
+          })
+        );
+      });
+
+      setInterval(function() {
+        $(".loading-blink").loading("toggle");
+      }, 2000);
+    </script>
 
 </html>

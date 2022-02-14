@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="<?=base_url()?>/assets/images/favicon.jpg">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <style>
@@ -32,7 +33,12 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/user/navbar_on')?>
+                 <?php if ($this->session->userdata('session_user')) { ?>
+                    <?php $this->load->view('comp/on/user/navbar_on')?>
+                <?php } else { ?>
+                    <?php $this->load->view('comp/off/navbar_off')?>
+                 
+                <?php } ?>
         </header>
         <!-- Fim Navbar -->
 
@@ -42,6 +48,8 @@
                     <div class="grid justify-items-center mb-5">
                         <img class="lg:h-44 xl:w-52 lg:w-44 xl:h-52 h-44 w-44  rounded-full" style="object-fit: cover;" src="<?=base_url()?>assets/images/avatars/<?=$rest['restaurante_imagem']?>" alt=""/>
                         <h1 class="font-semibold lg:text-lg xl:text-xl text-center text-gray-700 pt-5 pb-2"><?=$rest['restaurante_nome']?></h1>
+
+                        <p class="text-center text-green font-semibold"><?=$rest['restaurante_telefone']?> </p>
                         
                         <!-- <div class="flex items-center">
                             <img class="w-5 mr-1" src="<?=base_url()?>assets/images/star.svg" alt="">
@@ -55,9 +63,14 @@
                     </div>
 
                     <div class="flex space-x-2 px-5 items-center pb-2">
+                    
+                        <p class="font-semibold text-sm text-gray-700">HORÁRIOS DE FUNCIONAMENTO </p>
+                    </div>
+
+                    <!-- <div class="flex space-x-2 px-5 items-center pb-2">
                         <img class="h-5" src="<?=base_url()?>assets/images/taxaEntrega.svg" alt=""/>
                         <p class="font-semibold text-sm text-gray-700">PEDIDO MÍNIMO <b class="font-semibold text-sm text-green">R$ 15,00</b></p>
-                    </div>
+                    </div> -->
 
                     <!-- <div >
                         <a class="flex space-x-2 px-5 items-center pb-2" href="">
@@ -143,20 +156,20 @@
 
                                         <!-- MODAL ADD PRODUTO -->
                                         <div id="overlayModalProduto" style="overflow: scroll;" class="hidden bg-black bg-opacity-75 fixed inset-0 justify-center items-center z-50">
-                                            <div class="bg-white w-11/12 lg:w-4/6 xl:w-2/2 ">
+                                            <div class="bg-white w-11/12 mt-20 lg:w-4/6 xl:w-2/2 ">
                                                 <div class="flex justify-between items-center    py-3 p-3 ">
                                                     <h1 class="text-black text-base sm:text-lg produto_nome pl-4 font-semibold"></h1>
                                                     <span onclick="closeAddProdutoModal()" style="font-size:30px;cursor:pointer;margin-right:15px" class="font-semibold text-black ">x</span>
                                                 </div>
 
                                                 <!-- <form action="" id="form-add-produto"> -->
-                                                    <div class=" grid grid-cols-2 " >
-                                                        <div class=" col-span-2 xl:col-span-1 pl-5 pr-5">
+                                                    <div class=" grid xl:grid-cols-2 grid-cols-1 h-auto  " >
+                                                        <div class=" xl:span-col-1 span-col-1 pl-5 pr-5">
                                                             <img src="" class="w-full h-60 produto_imagem" style="object-fit: cover;" alt="">
                                                         </div>
                                                         <div>
 
-                                                        <div class="col-span-2 xl:col-span-1 w-full xl:pt-0 pt-3 xl:pl-0 pl-5 ">
+                                                        <div class="xl:span-col-1 span-col-1 w-2/2 xl:pt-0 pt-3 xl:pl-0 pl-5 pr-5 ">
                                                             <div>
                                                             
                                                                 <input type="hidden" class="produto_id_input" >
@@ -174,6 +187,15 @@
                                                                
                                                                 <p class="text-green font-semibold text-sm pt-3">DESCRIÇÃO</p>
                                                                 <p class="text-sm pt-2 w-2/2 pt-3 produto_descricao"></p>
+                                                            </div>
+
+
+                                                            <div style="overflow-y: scroll; overflow-x:hidden; max-height:200px;height:auto"  class="w-full  "> 
+
+                                                                <div  id="acompanhamento_div"  class="w-full">
+
+                                                                </div>
+
                                                             </div>
                                                         </div>
 
@@ -242,7 +264,7 @@
                                         }
                                     </script>                      
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 <script>
 $(document).ready(function ()
@@ -290,6 +312,22 @@ $(document).ready(function ()
     function addProdutoModal(id,produto_nome, produto_descricao, produto_valor, produto_imagem, produto_restaurante) {
         
 
+	    
+
+ 
+        $.ajax({
+            type: "POST",
+            url:'<?=base_url()?>restaurante/getAcompanhamentos',
+            data: {produto_id:id}, 
+            success: function(data)
+            {
+              $('#acompanhamento_div').html(data)
+            }
+        });
+
+
+
+
         const url = "<?=base_url()?>assets/images/produtos/"+produto_imagem
      
         $(".produto_imagem").attr("src",url);
@@ -323,12 +361,12 @@ $(document).ready(function ()
         const restaurante = $('.produto_restaurante_input').val()
         const valor = $('.produto_valor_input').val()
         const quantidade = $('.produto_quantidade_input').val()
-
+        const acompanhamento = $('#acompanhamentos').serialize();
     
  
         $.ajax({
             type: "POST",
-            data: {add_produto_carrinho:'.',produto_id:id,produto_restaurante:restaurante,produto_valor:valor, produto_quantidade:quantidade}, 
+            data: {add_produto_carrinho:'.',produto_id:id,produto_restaurante:restaurante,produto_valor:valor, produto_quantidade:quantidade, produto_acompanhamento:acompanhamento}, 
             success: function(data)
             {
                window.location.href = "<?=base_url()?>carrinho"
@@ -344,12 +382,13 @@ $(document).ready(function ()
         const restaurante = $('.produto_restaurante_input').val()
         const valor = $('.produto_valor_input').val()
         const quantidade = $('.produto_quantidade_input').val()
+        const acompanhamento = $('#acompanhamentos').serialize();
 
     
  
         $.ajax({
             type: "POST",
-            data: {add_produto_carrinho:'.',produto_id:id,produto_restaurante:restaurante,produto_valor:valor, produto_quantidade:quantidade}, 
+            data: {add_produto_carrinho:'.',produto_id:id,produto_restaurante:restaurante,produto_valor:valor, produto_quantidade:quantidade, produto_acompanhamento:acompanhamento}, 
             success: function(data)
             {
               location.reload()

@@ -12,7 +12,9 @@ class Produtos_model extends CI_Model {
         $produto_valor,
         $produto_desconto_habilitado,
         $produto_desconto,
-        $produto_desconto_tipo) {
+        $produto_desconto_tipo,
+        $produto_cidade
+        ) {
 
         $data = array(
             'produto_nome' => $produto_nome,
@@ -23,7 +25,8 @@ class Produtos_model extends CI_Model {
             'produto_valor' => $produto_valor,
             'produto_desconto_habilitado' => $produto_desconto_habilitado,
             'produto_desconto' => $produto_desconto,
-            'produto_desconto_tipo' => $produto_desconto_tipo
+            'produto_desconto_tipo' => $produto_desconto_tipo,
+            'produto_cidade' => $produto_cidade,
         );
 
         return $this->db->insert('cardapio_produtos', $data);

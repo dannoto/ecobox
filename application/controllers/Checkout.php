@@ -16,11 +16,15 @@ class Checkout extends CI_Controller {
 		$this->load->model('produtos_model');
 		$this->load->model('location_model');
 		$this->load->model('pedido_model');
+		$this->load->model('cupom_model');
+		$this->load->model('cardapio_model');
 		
 	}
 	public function index()
 	{
 
+		$this->perfil_model->autenticateUser();
+		
 		$cupom = "";
 
 		if (!null == $this->input->post("delete_carrinho_produto")) {
@@ -52,7 +56,7 @@ class Checkout extends CI_Controller {
 			$pedido_cidade = $this->input->post('pedido_cidade');
 
 
-			if ($this->pedido_model->addPedido(
+			$id_pedido = $this->pedido_model->addPedido(
 				$pedido_restaurante,
 				$pedido_pagamento,
 				$pedido_user,
@@ -65,10 +69,24 @@ class Checkout extends CI_Controller {
 				$pedido_troco,
 				$pedido_cep,
 				$pedido_cidade,
-				$pedido_estado
-			) ) {
-					// foi
+				$pedido_estado);
+		
+				//Carrinho Produtos to Pedidos Produtos
+			foreach ($this->carrinho_model->getCarrinhoUser( $pedido_user) as $p) {
+
+				$this->pedido_model->addPedidoProdutos($id_pedido, $pedido_user,$p->carrinho_produto, $p->carrinho_quantidade);
+
 			}
+
+			// Carrinho acompnhamento to Pedidos Acompanhamentos
+			foreach ($this->carrinho_model->getCarrinhoAcompanhamento($pedido_user) as $a) {
+
+				$this->pedido_model->addPedidoAcompanhamento($id_pedido,$a->acompanhamento_user, $a->acompanhamento_restaurante, $a->acompanhamento_produto, $a->acompanhamento_nome);
+
+			}
+					$this->carrinho_model->deleteCarrinho($pedido_user, $pedido_restaurante);
+					$this->cardapio_model->deleteAcompanhamentoCarrinho($pedido_user);
+		
 
 		}
 

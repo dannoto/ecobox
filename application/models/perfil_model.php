@@ -69,6 +69,22 @@ class Perfil_model extends CI_Model {
         return $this->db->update('usuarios', $data);
     }
 
+    public function autenticateUser() {
+        if ($this->session->userdata('session_user')) {
+            return true;
+        }  else {
+            redirect(base_url('login'));
+        }
+
+    }
+
+    public function getTermos() {
+        return $this->db->get('termos')->row_array();
+    }
+
+    public function getPrivacidade() {
+        return $this->db->get('privacidade')->row_array();
+    }
       
     
 

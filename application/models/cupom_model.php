@@ -49,6 +49,27 @@ class Cupom_model extends CI_Model {
         return $this->db->get('cupons')->result();
     }
 
+    public function existeCupom($id) {
+        $this->db->where('id', $id);
+        return $this->db->count_all_results('cupons');
+    }
+
+    public function limiteCupom($id) {
+        $this->db->where('id', $id);
+        return $this->db->get('cupons')->row_array()['cupom_limite'];
+    }
+
+    public function minimoCupom($id, $total) {
+        $this->db->where('id', $id);
+        $data =  $this->db->get('cupons')->row_array()['cupom_minimo'];
+
+        if ($total >= $data) {
+            return true; 
+        } else {
+            return false;
+        }
+    }
+
     public function getCupomByEstado($id, $cupom_estado) {
         $this->db->where('id', $id);
         $this->db->where('cupom_estado', $cupom_estado);

@@ -67,7 +67,7 @@
     <section>
         <!-- Início Navbar -->
         <header class="w-full fixed z-50">
-            <?php $this->load->view('comp/on/restaurante/navbar_pendente')?>
+            <?php $this->load->view('comp/on/restaurante/navbar_on')?>
         </header>
         <!-- Fim Navbar -->
 
@@ -132,7 +132,7 @@
                             <div class="flex justify-center bg-white xl:p-0 p-5 mb-1">
                                     <div class="border-gray-400 border xl:w-2/3  grid xl:grid-cols-4 grid-cols-1 bg-white ">
                                             <div class="xl:col-span-1 col-span-1 p-5">
-                                                <img class="h-32 w-32 cover" src="<?=base_url()?>assets/images/produtos/<?=$p->produto_imagem?>" >
+                                                <img style="object-fit: cover;" class="h-32 w-32 cover" src="<?=base_url()?>assets/images/produtos/<?=$p->produto_imagem?>" >
                                             </div>
                                             <div class="xl:col-span-2 col-span-1 p-5">
                                                 <h1 class="text-lg font-semibold"><?=$p->produto_nome?></h1>
@@ -140,18 +140,21 @@
                                                 <p class="font-semibold pt-2">R$ <?=$p->produto_valor?></p>
                                             </div>
                                             <div class="xl:col-span-1  col-span-1 p-5  space-y-1">
-                                                <button class=" w-36 border-red-500 border p-1  px-1 ml-2">
+                                                <!-- <button class=" w-36 border-red-500 border p-1  px-1 ml-2">
                                                     <span class="text-red-500 text-lg">+</span>
                                                     <span class="text-red-500 text-base">EDITAR</span>
+                                                </button> -->
+                                                <button onclick="deleteProduto(this.value)" value="<?=$p->id?>" class=" w-36 border-red-500 border p-1  px-1 ml-2">
+                                                    <span class="text-red-500 text-base">X</span>
+                                                    <span class="text-red-500 text-base">REMOVER</span>
                                                 </button>
-                                                <button onclick="deleteProduto(this.value)" value="<?=$p->id?>" class=" w-36 border-blue-500 border p-1  px-1 ml-2">
-                                                    <span class="text-blue-500 text-base">X</span>
-                                                    <span class="text-blue-500 text-base">REMOVER</span>
-                                                </button>
+                                                <form method="post" action="<?=base_url()?>restaurante/acompanhamentos">
+                                                    <input type="hidden" name="produto" value="<?=$p->id?>">
                                                 <button class="w-36 border-green border p-1  px-1 ml-2">
-                                                    <span class="text-green text-lg">+</span>
-                                                    <span class="text-green text-base">PROMOÇÃO</span>
-                                                </button>
+                                                        
+                                                        <span class="text-green text-xs">ACOMPANHAMENTO</span>
+                                                    </button>
+                                                </form>
                                             </div>
 
                                     </div>
@@ -225,8 +228,8 @@
 
  
                            <!-- MODAL ADD PRODUTO -->
-                           <div id="overlayModalProduto" class="hidden bg-black bg-opacity-75 fixed inset-0 justify-center items-center z-50">
-                                <div class="bg-white w-11/12 lg:w-4/6 xl:w-1/2 ">
+                           <div id="overlayModalProduto" style="overflow-y: scroll;" class="hidden  bg-black bg-opacity-75 fixed inset-0 justify-center items-center z-50">
+                                <div class="bg-white mt-24 xl:mt-5 w-11/12 lg:w-4/6 xl:w-1/2 ">
                                     <div class="flex justify-between items-center    py-3 p-3 ">
                                         <h1 class="text-black text-base sm:text-lg font-semibold">NOVO PRODUTO</h1>
                                         <span onclick="closeAddProdutoModal()" style="font-size:30px;cursor:pointer;margin-right:15px" class="font-semibold text-black ">x</span>
@@ -250,11 +253,11 @@
                                                 </div>
                                                 <div class="col-span-1 p-3">
                                                     <label for="">Foto do Produto</label><br>
-                                                    <input class="   h-12 p-2" type="file" id="produto_imagem" name="produto_imagem" >
+                                                    <input onchange="upload(this.value)" accept="image/*" class="   hidden h-12 p-2" type="file" id="produto_imagem" name="produto_imagem" >
 
-                                                    <img class="w-36 h-32 cover" src="<?=base_url()?>assets/images/upload.png" alt="">
+                                                    <img class="w-36 cursor-pointer h-32 "  style="object-fit: cover;" onclick="openImg()" id="img" src="<?=base_url()?>assets/images/upload.png" alt="">
                                                     <br>
-                                                    <label for="produto_desconto_habilitado">Habilitar Desconto</label><br>
+                                                    <!-- <label for="produto_desconto_habilitado">Habilitar Desconto</label><br>
                                                     <select class="w-2/3 border border-gray-400 h-12 p-2"  required name="produto_desconto_habilitado" id="produto_desconto_habilitado">
                                                         <option value="1">Sim</option>
                                                         <option value="0">Não</option>
@@ -262,7 +265,7 @@
 
                                                     <br><br>
                                                     <label for="produto_desconto">Procentagem do Desconto (%)</label><br>
-                                                    <input class="w-1/3 border border-gray-400 h-12 p-2" type="number" max="100" min="0" maxlength="2"  required name="produto_desconto" id="produto_desconto">
+                                                    <input class="w-1/3 border border-gray-400 h-12 p-2" type="number" max="100" min="0" maxlength="2"  required name="produto_desconto" id="produto_desconto"> -->
                                                 
 
                                                 </div>
@@ -272,7 +275,7 @@
                                 
                                         <div class="flex justify-end space-x-4 px-6 py-3">
                                             <button  onclick="closeAddProdutoModal()"  class="px-4 bg-transparent p-3 rounded-lg text-red-500 hover:bg-gray-100 hover:text-red-400 mr-2">Fechar</button>
-                                            <button onclick="addProduto()" class="px-4 bg-green p-3 rounded-lg text-white hover:bg-green ">ADICIONAR</button>
+                                            <button onclick="addProduto()" class="px-4 bg-green p-3 text-sm text-white hover:bg-green ">ADICIONAR</button>
                                         </div>
 
                                  
@@ -303,9 +306,46 @@
 
 
 <script>
+ function upload(v){
+ 
+    // s
+    // $('#img').attr('src', file_data)
+
+    // $("#but_upload").click(function(){
+
+            var fd = new FormData();
+            var files = $('#produto_imagem')[0].files;
 
 
+          
+            // Check file selected or not
+            if(files.length > 0 ){
+            fd.append('produto_imagem',files[0]);
+            fd.append('add_imagem','.');
+            $.ajax({
+                url: '<?=base_url()?>/restaurante/cardapio',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response != 0){
+                        var res = $('#produto_restaurante').val();
+                        $("#img").attr("src",'<?=base_url()?>assets/images/produtos/'+res+files[0].name); 
+                   
+                    }else{
+                        alert('file not uploaded');
+                    }
+                },
+            });
+            }else{
+                alert("Please select a file.");
+            }
+ }
 
+ function openImg(){
+     $('#produto_imagem').trigger('click')
+ }
    function getCidades(e) {
        
 
@@ -412,51 +452,69 @@
     }
 
     function addProduto() {
-     
+
+        
+      
         const produto_nome = $('#produto_nome').val()
         const produto_descricao = $('#produto_descricao').val()
         const produto_restaurante = $('#produto_restaurante').val()
         const produto_valor = $('#produto_valor').val()
         const produto_desconto_tipo = 'porcentagem'
-        const produto_imagem =  $('#produto_imagem')[0].files[0]
+       
         const produto_categoria = $('#produto_categoria').val()
         const produto_desconto = $('#produto_desconto').val()
         const produto_desconto_habilitado = $('#produto_desconto_habilitado').val()
 
-        const data = new FormData();
- 
-        data.append('add_produto', '.')
-        data.append('produto_nome', produto_nome)
-        data.append('produto_descricao', produto_descricao)
-        data.append('produto_restaurante', produto_restaurante)
-        data.append('produto_valor', produto_valor)
-        data.append('produto_imagem', produto_imagem)
-        data.append('produto_categoria', produto_categoria)
-        data.append('produto_desconto', produto_desconto)
-        data.append('produto_desconto_tipo', produto_desconto_tipo)
-        data.append('produto_desconto_habilitado', produto_desconto_habilitado)
+        if (produto_nome.length == 0) {
+            alert('Preencha o nome do produto.')
+        }  else if ( produto_descricao.length == 0) {
+            alert('Preencha a descrição do produto.')
+        } else if ( produto_valor.length == 0) {
+            alert('Preencha o valor do produto.')
+        } else if ( $('#produto_imagem').val() == 0) {
+            alert('Preencha a imagem do produto.')
+        } else {
 
-        $.ajax({
-            type: "POST",
-            url: '',
+                    var files = $('#produto_imagem')[0].files;
+                const produto_imagem = files[0].name
 
-            data: {
-                add_produto:'.',
-                produto_nome:produto_nome,
-                produto_descricao:produto_descricao,
-                produto_restaurante:produto_restaurante,
-                produto_valor:produto_valor,
-                produto_imagem:produto_imagem,
-                produto_categoria:produto_categoria,
-                produto_desconto:produto_desconto,
-                produto_desconto_tipo:produto_desconto_tipo,
-                produto_desconto_habilitado:produto_desconto_habilitado },
-            success: function(data)
-            {
-                location.reload()
-                // console.log(data)
-            }
-        });
+                    const data = new FormData();
+            
+                    data.append('add_produto', '.')
+                    data.append('produto_nome', produto_nome)
+                    data.append('produto_descricao', produto_descricao)
+                    data.append('produto_restaurante', produto_restaurante)
+                    data.append('produto_valor', produto_valor)
+                    // data.append('produto_imagem', )
+                    data.append('produto_categoria', produto_categoria)
+                    data.append('produto_desconto', produto_desconto)
+                    data.append('produto_desconto_tipo', produto_desconto_tipo)
+                    data.append('produto_desconto_habilitado', produto_desconto_habilitado)
+
+                    $.ajax({
+                        type: "POST",
+                        url: '',
+
+                        data: {
+                            add_produto:'.',
+                            produto_nome:produto_nome,
+                            produto_descricao:produto_descricao,
+                            produto_restaurante:produto_restaurante,
+                            produto_valor:produto_valor,
+                            produto_imagem:produto_restaurante+produto_imagem,
+                            produto_categoria:produto_categoria,
+                            produto_desconto:produto_desconto,
+                            produto_desconto_tipo:produto_desconto_tipo,
+                            produto_desconto_habilitado:produto_desconto_habilitado },
+                        success: function(data)
+                        {
+                            location.reload()
+                            // console.log(data)
+                        }
+                    });
+        }
+
+        
     }
 
 

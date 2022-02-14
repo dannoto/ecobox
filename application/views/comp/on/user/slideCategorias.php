@@ -48,7 +48,7 @@
             <?php foreach($this->categorias_model->getCategorias() as $c) { ?>
                 
                 <div class="containerSlide">
-                    <a href="">
+                    <a href="<?=base_url()?>categorias/<?=$c->id?>">
                         <div style="background-image: url('<?=base_url()?>assets/images/categorias/<?=$c->cat_imagem?>')" class="imgSlide bg-cover bg-center rounded-lg"></div>
                         <p class="font-normal text-sm text-center pt-1 titleSlide"><?=$c->cat_nome?></p>
                     </a>
