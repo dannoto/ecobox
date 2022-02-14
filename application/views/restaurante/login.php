@@ -61,7 +61,7 @@
                             <label for="password" class="font-semibold text-gray-700">Senha</label>
                             <input type="password" name="restaurante_password" minlength="6" maxlength="200" id="password" class="w-full h-12 p-2 mb-5 border-2 border-opacity-50 border-gray-700 rounded-md focus:outline-none" required maxlength="200">
 
-                            <a class="pb-10" href="<?=base_url()?>recuperacao">
+                            <a class="pb-10" href="<?=base_url()?>restaurante/recuperacao">
                                 <p id="recuperarSenha" class="text-gray-700">Recuperar minha senha</p>
                             </a>
                            

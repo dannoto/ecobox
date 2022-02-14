@@ -26,18 +26,24 @@ class Cadastro_model extends CI_Model {
         );
         return $this->db->insert('usuarios', $data);
     }
+    
 
     public function checkEmail($email) {
 
-        $this->db->where('user_email', $email);
-        
-        if ($this->db->count_all_results('usuarios') > 0 ) {
-            return false;
-        } else {
-            return true;
-        }
+        $this->db->where('restaurante_email', $email);
+        return $this->db->get('usuarios')->row_array();
     
     }
+
+    public function checkEmailRestaurante($email) {
+
+        $this->db->where('restaurante_email', $email);
+        return $this->db->get('restaurantes')->row_array();
+     
+       
+    }
+
+    
 
 
 }

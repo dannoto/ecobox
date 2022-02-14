@@ -15,6 +15,9 @@ class Restaurante extends CI_Controller {
 		$this->load->model('produtos_model');
 		$this->load->model('carrinho_model');
 		$this->load->model('pedido_model');
+		$this->load->model('recuperacao_model');
+		$this->load->model('cadastro_model');
+		$this->load->model('email_model');
 
 
 		// if ($this->session->userdata('session_restaurante')) {
@@ -744,6 +747,93 @@ class Restaurante extends CI_Controller {
 
 		$this->load->view('restaurante/inscricao/funcionamento');
 
+	}
+
+	public function redefinicao() {
+
+		if  ($this->input->get()) {
+			$token = htmlentities($this->input->get('token'));
+			$email = htmlentities($this->input->get('email'));
+
+			$user_token = $this->recuperacao_model->getTokenRestaurante($email); 
+
+			if ($token == $user_token ) {
+
+				if ($this->input->post()) {
+
+				
+					$nova_senha =  $this->input->post('new_password');
+					$confirmacao_senha = $this->input->post('confirm_password');
+
+					
+					// if ($this->recuperacao_model->checkPasswordRestaurante($email, $senha_atual)) {
+
+						if ($nova_senha == $confirmacao_senha) {
+
+							if ($this->recuperacao_model->updatePasswordRestaurante($email, $nova_senha))  {
+								redirect(base_url('restaurante/login'));	
+							}
+
+						} else {
+
+							$this->session->set_flashdata('recuperacao','Suas senhas não combinam.');
+
+						}
+
+					// } else {
+
+					// 	$this->session->set_flashdata('recuperacao','Sua senha atual está incorreta.');
+					// }
+
+
+				}
+
+				$this->load->view('restaurante/redefinicao');
+
+			} else {
+				redirect(base_url('restaurante/login'));	
+			}
+		} else {
+			redirect(base_url('restaurante/login'));	
+		}
+
+
+	}
+
+	public function recuperacao() {
+
+
+		if ($this->input->post()) {
+
+			// print_r($this->input->post());
+
+			// echo $this->input->post('email'); 
+			$user_email = htmlspecialchars($this->input->post('user_email'));
+
+			if ($this->cadastro_model->checkEmailRestaurante($user_email)) {
+
+				$user_token = $this->recuperacao_model->getTokenRestaurante($user_email);
+				
+				if ($this->email_model->EmailRecuperacaoRestaurante($user_email, $user_token)) {
+				
+					$this->session->set_flashdata('recuperacao', 'Um e-mail foi enviado para você.');
+								
+				} else {
+				
+					$this->session->set_flashdata('recuperacao', 'Erro ao enviar email. Tente mais tarde.');
+				}	
+			
+				
+			} else {
+
+				$this->session->set_flashdata('recuperacao', 'Não existe conta com este e-mail.');
+			
+			}
+		}
+
+
+
+		$this->load->view('restaurante/recuperacao');
 	}
 
 	public function documentos() 

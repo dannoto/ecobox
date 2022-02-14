@@ -15,6 +15,32 @@ class Recuperacao_model extends CI_Model {
         return $this->db->update('usuarios', $data);
     }
 
+    public function updatePasswordUsuario($email, $novasenha) {
+        $this->db->where('user_email', $email);
+     
+        $data = array (
+            'user_password' => md5($novasenha),
+        );
+
+        return $this->db->update('usuarios', $data);
+    }
+
+    public function updatePasswordRestaurante($email, $novasenha) {
+        $this->db->where('restaurante_email', $email);
+     
+        $data = array (
+            'restaurante_password' => md5($novasenha),
+        );
+
+        return $this->db->update('restaurantes', $data);
+    }
+
+    public function checkPasswordRestaurante($email, $senha_atual) {
+        $this->db->where('restaurante_email', $email);
+        $this->db->where('restaurante_password', md5($senha_atual));
+        
+        return $this->db->get('restaurantes')->row_array();
+    }
     
     public function checkPassword($id, $old_password) {
         
@@ -28,6 +54,12 @@ class Recuperacao_model extends CI_Model {
     public function getToken($email) {
         $this->db->where('user_email', $email);
         return $this->db->get('usuarios')->row_array()['user_token'];
+
+    }
+
+    public function getTokenRestaurante($email) {
+        $this->db->where('restaurante_email', $email);
+        return $this->db->get('restaurantes')->row_array()['restaurante_token'];
 
     }
     
