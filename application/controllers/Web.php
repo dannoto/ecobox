@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Web extends CI_Controller {
 	function __construct() {
 
 		parent::__construct();
@@ -20,8 +20,18 @@ class Home extends CI_Controller {
 	public function index()
 	{
 
-		
+		if (isset($_COOKIE['cidade'])) {
+			$cidade = $_COOKIE['cidade'];
+		} else {
+			$cidade = "";
+		}
 
-		$this->load->view('all/start');
+
+		$data = array(
+			'estados' => $this->location_model->getEstados(),
+			'cidade' => $cidade,
+		);
+
+		$this->load->view('all/home', $data);
 	}
 }
